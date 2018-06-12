@@ -1,0 +1,21 @@
+<html>
+
+<head>
+  <title>ユーザー新規作成</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <% @user.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+  <%= form_tag("/user/create") do %>
+    <p>ユーザ名</p>
+    <input name="name">
+    <p>パスワード</p>
+    <input name="password">
+    <input type="submit" value="新規作成">
+  <% end %>
+</body>
+
+</html>

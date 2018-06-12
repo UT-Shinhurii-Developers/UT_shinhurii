@@ -1,0 +1,21 @@
+<html>
+
+<head>
+  <title>ログインフォーム</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <% if @error_message %>
+    <%= @error_message %>
+  <% end %>
+  <%= form_tag("/login") do %>
+    <p>ユーザ名</p>
+    <input name="name">
+    <p>パスワード</p>
+    <input name="password">
+    <input type="submit" value="ログイン">
+  <% end %>
+</body>
+
+</html>

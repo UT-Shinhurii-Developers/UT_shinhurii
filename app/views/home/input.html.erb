@@ -1,0 +1,30 @@
+<html>
+
+<head>
+  <title>成績入力画面</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <h1>成績入力画面</h1>
+  <p><%= @class %>の成績を入力してください</p>
+  <% case @class %>
+  <% when "基礎科目" then %>
+    <!--成績入力フォーム-->
+    <%= link_to("展開科目の成績入力へ", "/input/展開科目") %>
+  <% when "展開科目" then %>
+    <!--成績入力フォーム-->
+    <%= link_to("総合科目ABCの成績入力へ", "/input/総合科目ABC") %>
+  <% when "総合科目ABC" then %>
+    <!--成績入力フォーム-->
+    <%= link_to("総合科目DEFの成績入力へ", "/input/総合科目DEF") %>
+  <% when "総合科目DEF" then %>
+    <!--成績入力フォーム-->
+    <%= link_to("主題科目の成績入力へ", "/input/主題科目") %>
+  <% when "主題科目" then %>
+    <!--成績入力フォーム-->
+    <%= link_to("計算結果へ", "/result") %>
+  <% end %>
+</body>
+
+</html>
