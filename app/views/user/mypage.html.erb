@@ -12,7 +12,7 @@
   <% @scores = Score.where(user_name: @current_user.name) %>
   <% if @scores.any? %>
     <p><%= @scores.length %>個の成績データがあります</p>
-    <%= link_to("全削除", "/score/destroy_all", method: :post) %>
+    <%= link_to("全削除", "/score/destroy_all", method: :post, data: {confirm:'成績を全て削除してよろしいですか？'}) %>
   <% else %>
     <p>成績データがありません</p>
   <% end %>
@@ -51,7 +51,7 @@
               <%= link_to("編集", "/user/#{score.id}/edit") %>
             </td>
             <td>
-              <%= link_to("削除", "/score/#{score.id}/destroy", {method:"post"}) %>
+              <%= link_to("削除", "/score/#{score.id}/destroy", method: :post, data:{confirm:'削除してよろしいですか？'}) %>
             </td>
           </tr>
         </tbody>
