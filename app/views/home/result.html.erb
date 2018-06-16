@@ -15,16 +15,17 @@
     @credit = @scores.all.map{|score| score.credit}
     @w_c = @weight.zip(@credit).map{|w,c|w*c}
     @s_w_c = @score.zip(@w_c).map{|s,w_c|s*w_c}
-    @result = @s_w_c.sum/@w_c.sum %>
+    @result = @s_w_c.sum/@w_c.sum.round(2) %>
     <p>あなたの進振り点はこちらです。</p>
-    <%= @result.round(2) %>点
+    <%= @result %>点
     <p>結果を共有する</p>
-    <%= social_share_button_tag("UT_Shinhurii", :allow_sites => %w(twitter)) %>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://ut-shinhurii.herokuapp.com" data-text="進振りサービスUT_Shinhuriiを使ったよ！私の進振り点は<%= @result %>点でした！" data-hashtags="UT_Shinhurii">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   <% else %>
     <p>成績情報がありません</p>
   <% end %>
   <br>
-  <%= link_to("トップページへ", "/top") %>
+  <%= link_to("トップページへ", "/") %>
 </body>
 
 </html>

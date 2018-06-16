@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'login' => 'user#login'
   post 'logout' => 'user#logout'
 
-  get 'top' => 'home#top'
+  get '' => 'home#top'
   get 'input/:class' => 'home#input'
   get 'result' => 'home#result'
 
