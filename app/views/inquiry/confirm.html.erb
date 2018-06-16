@@ -20,10 +20,11 @@
       </tr>
       <tr>
         <th>お問い合わせ内容</th>
-        <td><%= hidden_field_tag :message, @inquiry.message %><%= simple_format(@inquiry.message) %></td>
+        <td><%= hidden_field_tag :message, @inquiry.message %><%= @inquiry.message %></td>
       </tr>
     </table>
     <input type="submit" value="送信">
+    <%= submit_tag("入力内容を変更する", name: "change_button") %>
   <% end %>
 </body>
 

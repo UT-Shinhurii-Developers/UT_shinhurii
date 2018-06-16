@@ -19,11 +19,15 @@ before_action :authenticate_user, {only: [:index, :confirm, :thanks]}
   end
 
   def thanks
-    #メール送信
     @inquiry = Inquiry.new(name: params[:name], email: params[:email], message: params[:message])
-    InquiryMailer.received_email(@inquiry).deliver
+    if params[:change_button]
+      render :action => 'index'
+    else
+      #メール送信
+      InquiryMailer.received_email(@inquiry).deliver
 
-    #完了画面を表示
-    render :action => 'thanks'
+      #完了画面を表示
+      render :action => 'thanks'
+    end
   end
 end
