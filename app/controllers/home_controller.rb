@@ -16,7 +16,7 @@ before_action :authenticate_user, {only: [:input, :result]}
       render :layout => 'input_layout'
     else
       flash[:notice] = "無効なURLです"
-      redirect_to("/top")
+      redirect_to("/")
     end
   end
   def result

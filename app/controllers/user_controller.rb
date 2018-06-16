@@ -12,7 +12,7 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
       if @user.save
         session[:user_id] = @user.id
         flash[:notice] = "登録しました！"
-        redirect_to("/top")
+        redirect_to("/")
       else
         render :new
         return
@@ -33,7 +33,7 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
     @user = User.find_by(name: params[:name])
     if @current_user != @user
       flash[:notice] = "権限がありません"
-      redirect_to("/top")
+      redirect_to("/")
     end
     render :layout => 'mypage_layout'
   end
@@ -45,7 +45,7 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
         flash[:notice] = "ログインしました"
-        redirect_to("/top")
+        redirect_to("/")
       else
         @error_message = "ユーザ名またはパスワードが間違っています"
         render :login_form
@@ -57,7 +57,7 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
   def logout
     session[:user_id] = nil
     flash[:notice] = "ログアウトしました"
-    redirect_to("/top")
+    redirect_to("/")
   end
   def add
     @class = params[:class]
@@ -66,7 +66,7 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
       return
     else
       flash[:notice] = "無効なURLです"
-      redirect_to("/top")
+      redirect_to("/")
     end
   end
   def edit
