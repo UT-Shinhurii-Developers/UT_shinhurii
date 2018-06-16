@@ -99,5 +99,6 @@ Rails.application.configure do
     user_name:            'UT.shinhurii@gmail.com', # Gmailメールアドレス
     password:             'KALSshinhurii', # Gmailメールアドレスのパスワード
     authentication:       'login',
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+  }
 end
