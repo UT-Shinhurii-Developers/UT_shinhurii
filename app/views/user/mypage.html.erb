@@ -48,6 +48,9 @@
               <%= score.credit %>
             </td>
             <td>
+              <%= link_to("編集", "/user/#{score.id}/edit") %>
+            </td>
+            <td>
               <%= link_to("削除", "/score/#{score.id}/destroy", {method:"post"}) %>
             </td>
           </tr>

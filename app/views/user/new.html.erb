@@ -6,10 +6,15 @@
 </head>
 
 <body>
-  <% @user.errors.full_messages.each do |message| %>
-    <%= message %>
-  <% end %>
   <h1>新規登録</h1>
+  <% if @user.errors.any? %>
+    <strong>入力内容にエラーがあります</strong>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
   <%= form_for (@user), :url => {:action => :create} do |f| %>
     <p>ユーザ名</p>
     <%= f.text_field :name, value: @user.name %>

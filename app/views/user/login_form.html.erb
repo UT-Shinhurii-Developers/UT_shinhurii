@@ -6,10 +6,10 @@
 </head>
 
 <body>
-  <% if @error_message %>
-    <%= @error_message %>
-  <% end %>
   <h1>ログイン</h1>
+  <% if @error_message.present? %>
+    <strong><%= @error_message %></strong>
+  <% end %>
   <%= form_tag("/login") do %>
     <p>ユーザ名</p>
     <input name="name">

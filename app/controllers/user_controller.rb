@@ -1,6 +1,6 @@
 class UserController < ApplicationController
 
-before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add]}
+before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add, :edit]}
 
   def new
     @user = User.new
@@ -16,6 +16,14 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
       else
         render :new
         return
+      end
+      @number = @user.id
+      if @number%10 == 0 && @number <= 100
+        ReportMailer.send_number_of_users(@number).deliver
+        flash[:notice] = "あなたは" + @number.to_s + "人目の登録者です。"
+      elsif @number % 100 == 0
+        ReportMailer.send_number_of_users(@number).deliver
+        flash[:notice] = "あなたは記念すべき" + @number + "人目の登録者です。おめでとうございます！！！"
       end
     else
       redirect_to("/user/new")
@@ -60,5 +68,8 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
       flash[:notice] = "無効なURLです"
       redirect_to("/top")
     end
+  end
+  def edit
+    @score = Score.find_by(id:params[:id])
   end
 end

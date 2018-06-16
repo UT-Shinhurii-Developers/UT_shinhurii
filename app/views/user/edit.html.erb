@@ -1,0 +1,41 @@
+<html>
+
+  <head>
+    <title>成績編集画面</title>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <h1>成績を編集してください</h1>
+    <%= form_tag("/score/#{@score.id}/update") do %>
+      <table>
+      <thead>
+        <tr>
+          <th>授業名</th>
+          <th>点数</th>
+          <th>重率</th>
+          <th>単位数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <input name="class_name" value="<%= @score.class_name %>">
+          </td>
+          <td>
+            <input name="score" value="<%= @score.score %>">
+          </td>
+          <td>
+            <input name="weight" value="<%= @score.weight %>">
+          </td>
+          <td>
+            <input name="credit" value="<%= @score.credit %>">
+          </td>
+        </tr>
+      </tbody>
+      </table>
+      <input type="submit" value="保存">
+    <% end %>
+  </body>
+
+  </html>

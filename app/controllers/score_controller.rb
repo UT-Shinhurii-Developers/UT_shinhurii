@@ -264,4 +264,31 @@ class ScoreController < ApplicationController
     flash[:notice] = "成績情報を全て削除しました"
     redirect_to("/user/#{@current_user.name}")
   end
+  def update
+    @score = Score.find_by(id:params[:id])
+    @score_new = Score.new(class_name:params[:class_name], score:params[:score], weight:params[:weight], credit:params[:credit])
+    unless params[:class_name].present? && params[:score].present? && params[:weight].present? && params[:credit].present?
+      flash[:notice] = "成績データを全て入力してください"
+      redirect_to("/user/#{@score.id}/edit")
+      return
+    end
+    unless @score_new.valid? then
+      flash[:notice] = "授業名以外は半角数字で入力してください"
+      redirect_to("/user/#{@score.id}/edit")
+      return
+    end
+    if @score_new.weight == 0
+      flash[:notice] = "重率が0の授業は入力しないでください"
+      redirect_to("/user/#{@score.id}/edit")
+      return
+    end
+    if @score_new.credit == 0
+      flash[:notice] = "単位数が0の授業は入力しないでください"
+      redirect_to("/user/#{@score.id}/edit")
+      return
+    end
+    @score.update_attributes(:class_name => params[:class_name], :score => params[:score], :weight => params[:weight], :credit => params[:credit])
+    flash[:notice] = "成績情報を編集しました"
+    redirect_to("/user/#{@current_user.name}")
+  end
 end

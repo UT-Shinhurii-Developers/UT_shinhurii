@@ -1,0 +1,30 @@
+<html>
+
+<head>
+  <title>お問い合わせ確認画面</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <%= form_tag("/inquiry/thanks") do %>
+    <h1>お問い合わせ</h1>
+    <p>この内容でよろしいですか？</p>
+    <table>
+      <tr>
+        <th>名前</th>
+        <td><%= hidden_field_tag :name, @inquiry.name %><%= @inquiry.name %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= hidden_field_tag :email, @inquiry.email %><%= @inquiry.email %></td>
+      </tr>
+      <tr>
+        <th>お問い合わせ内容</th>
+        <td><%= hidden_field_tag :message, @inquiry.message %><%= simple_format(@inquiry.message) %></td>
+      </tr>
+    </table>
+    <input type="submit" value="送信">
+  <% end %>
+</body>
+
+</html>
