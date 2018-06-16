@@ -29,8 +29,8 @@
           <th>登録</th>
           <th>授業名</th>
           <th>点数</th>
-          <th>重率</th>
           <th>単位数</th>
+          <th>重率</th>
         </tr>
       </thead>
       <tbody>
@@ -135,8 +135,8 @@
           <% save_i = "save" + i.to_s
           class_name_i = "class_name" + i.to_s
           score_i = "score" + i.to_s
-          weight_i = "weight" + i.to_s
-          credit_i = "credit" + i.to_s %>
+          credit_i = "credit" + i.to_s
+          weight_i = "weight" + i.to_s %>
           <tr>
             <td>
               <input type="checkbox" name="<%= save_i %>" value="checked" <% if @score_list[i][0]=="checked" %>checked<% end %>>
@@ -148,10 +148,10 @@
               <input name="<%= score_i %>" value="<%= @score_list[i][2] %>">
             </td>
             <td>
-              <input name="<%= weight_i %>" value="<%= @score_list[i][3] %>">
+              <input name="<%= credit_i %>" value="<%= @score_list[i][3] %>">
             </td>
             <td>
-              <input name="<%= credit_i %>" value="<%= @score_list[i][4] %>">
+              <input name="<%= weight_i %>" value="<%= @score_list[i][4] %>">
             </td>
           </tr>
         <% end %>

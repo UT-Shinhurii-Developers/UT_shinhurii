@@ -28,8 +28,8 @@
           <tr>
             <th>授業名</th>
             <th>点数</th>
-            <th>重率</th>
             <th>単位数</th>
+            <th>重率</th>
           </tr>
         </thead>
         <% @scores.each do |score| %>
@@ -42,10 +42,10 @@
               <%= score.score %>
             </td>
             <td>
-              <%= score.weight %>
+              <%= score.credit %>
             </td>
             <td>
-              <%= score.credit %>
+              <%= score.weight %>
             </td>
             <td>
               <%= link_to("編集", "/user/#{score.id}/edit") %>
