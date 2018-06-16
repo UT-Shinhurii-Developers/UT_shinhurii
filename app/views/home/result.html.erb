@@ -7,7 +7,24 @@
 
 <body>
   <h1>計算結果</h1>
-  <p>あなたの進振り点はこちらです。</p>
+  <%
+  @scores = Score.where(user_name: @current_user.name)
+  if @scores.any?
+    @score = @scores.all.map{|score| score.score}
+    @weight = @scores.all.map{|score| score.weight}
+    @credit = @scores.all.map{|score| score.credit}
+    @w_c = @weight.zip(@credit).map{|w,c|w*c}
+    @s_w_c = @score.zip(@w_c).map{|s,w_c|s*w_c}
+    @result = @s_w_c.sum/@w_c.sum %>
+    <p>あなたの進振り点はこちらです。</p>
+    <%= @result.round(2) %>点
+    <p>結果を共有する</p>
+    <%= social_share_button_tag("UT_Shinhurii", :allow_sites => %w(twitter)) %>
+  <% else %>
+    <p>成績情報がありません</p>
+  <% end %>
+  <br>
+  <%= link_to("トップページへ", "/top") %>
 </body>
 
 </html>

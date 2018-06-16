@@ -9,13 +9,15 @@
   <% if @error_message %>
     <%= @error_message %>
   <% end %>
+  <h1>ログイン</h1>
   <%= form_tag("/login") do %>
     <p>ユーザ名</p>
     <input name="name">
     <p>パスワード</p>
-    <input name="password">
+    <input type="password" name="password">
     <input type="submit" value="ログイン">
   <% end %>
+  <p>または<%= link_to("新規登録", "/user/new") %></p>
 </body>
 
 </html>

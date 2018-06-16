@@ -8,7 +8,14 @@
 <body>
   <h1>進振りサービス for 東大生</h1>
   <% if session[:user_id] %>
-    <a href="/input/基礎科目">成績入力画面へ</a>
+  <% @scores = Score.where(user_name: @current_user.name) %>
+  <% if @scores.any? %>
+    <%= link_to("成績を追加する", "/input/必修科目") %>
+  <% else %>
+    <%= link_to("成績を入力する", "/input/必修科目") %>
+  <% end %>
+  <% else %>
+    <p>サービスを利用するには、<%= link_to("ログイン", "/login_form") %>または<%= link_to("新規登録", "/user/new") %>してください。</p>
   <% end %>
 </body>
 

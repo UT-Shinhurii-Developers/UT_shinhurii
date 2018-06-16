@@ -10,13 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612064406) do
+ActiveRecord::Schema.define(version: 20180614143935) do
+
+  create_table "scores", force: :cascade do |t|
+    t.string "user_name"
+    t.string "class_name"
+    t.integer "score"
+    t.float "weight"
+    t.integer "credit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "class_type"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "karui"
   end
 
 end

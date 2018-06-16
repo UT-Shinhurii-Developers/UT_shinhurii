@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>ユーザー新規作成</title>
+  <title>ユーザー新規登録</title>
   <meta charset="utf-8">
 </head>
 
@@ -9,13 +9,18 @@
   <% @user.errors.full_messages.each do |message| %>
     <%= message %>
   <% end %>
-  <%= form_tag("/user/create") do %>
+  <h1>新規登録</h1>
+  <%= form_for (@user), :url => {:action => :create} do |f| %>
     <p>ユーザ名</p>
-    <input name="name">
+    <%= f.text_field :name, value: @user.name %>
+    <p>科類</p>
+    <%= f.select :karui, [["理科一類", "理科一類"],["理科二類", "理科二類"],["理科三類", "理科三類"],["文科一類","文科一類"],["文科二類","文科二類"],["文科三類","文科三類"]], :prompt => "選択してください" %>
     <p>パスワード</p>
-    <input name="password">
-    <input type="submit" value="新規作成">
+    <%= f.password_field :password %>
+    <br>
+    <%= f.submit %>
   <% end %>
+
 </body>
 
 </html>

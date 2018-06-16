@@ -12,4 +12,6 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//SocialShareButtonというgemを使う
+//= require social-share-button
 //= require_tree .

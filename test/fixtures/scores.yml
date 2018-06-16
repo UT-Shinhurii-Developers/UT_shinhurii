@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_name: MyString
+  class_name: MyString
+  type: 
+  score: 1
+  weight: 1.5
+  credit: 1
+
+two:
+  user_name: MyString
+  class_name: MyString
+  type: 
+  score: 1
+  weight: 1.5
+  credit: 1

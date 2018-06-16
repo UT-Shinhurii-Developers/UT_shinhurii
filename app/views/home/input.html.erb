@@ -8,22 +8,157 @@
 <body>
   <h1>成績入力画面</h1>
   <p><%= @class %>の成績を入力してください</p>
-  <% case @class %>
-  <% when "基礎科目" then %>
-    <!--成績入力フォーム-->
-    <%= link_to("展開科目の成績入力へ", "/input/展開科目") %>
-  <% when "展開科目" then %>
-    <!--成績入力フォーム-->
-    <%= link_to("総合科目ABCの成績入力へ", "/input/総合科目ABC") %>
-  <% when "総合科目ABC" then %>
-    <!--成績入力フォーム-->
-    <%= link_to("総合科目DEFの成績入力へ", "/input/総合科目DEF") %>
-  <% when "総合科目DEF" then %>
-    <!--成績入力フォーム-->
-    <%= link_to("主題科目の成績入力へ", "/input/主題科目") %>
-  <% when "主題科目" then %>
-    <!--成績入力フォーム-->
-    <%= link_to("計算結果へ", "/result") %>
+  <% case @class
+  when "必修科目"
+    @class = "hisshuu"
+  when "基礎科目"
+    @class = "kiso"
+  when "総合科目L"
+    @class = "sougouL"
+  when "総合科目ABC"
+    @class = "sougouABC"
+  when "総合科目DEF"
+    @class = "sougouDEF"
+  when "その他の総合科目"
+    @class = "sougouEX"
+  end %>
+  <%= form_tag("/score/#{@class}") do %>
+    <table>
+    <thead>
+      <tr>
+        <th>登録</th>
+        <th>授業名</th>
+        <th>点数</th>
+        <th>重率</th>
+        <th>単位数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+      case @current_user.karui
+      when "理科一類"
+        case @class
+        when "hisshuu"
+          n = 15
+        when "kiso"
+          n = 10
+        when "sougouL"
+          n = 5
+        when "sougouABC"
+          n = 4
+        when "sougouDEF"
+          n = 4
+        when "sougouEX"
+          n = 20
+        end
+      when "理科二類"
+        case @class
+        when "hisshuu"
+          n = 15
+        when "kiso"
+          n = 10
+        when "sougouL"
+          n = 5
+        when "sougouABC"
+          n = 4
+        when "sougouDEF"
+          n = 4
+        when "sougouEX"
+          n = 20
+        end
+      when "理科三類"
+        case @class
+        when "hisshuu"
+          n = 15
+        when "kiso"
+          n = 10
+        when "sougouL"
+          n = 5
+        when "sougouABC"
+          n = 4
+        when "sougouDEF"
+          n = 4
+        when "sougouEX"
+          n = 20
+        end
+      when "文科一類"
+        case @class
+        when "hisshuu"
+          n = 15
+        when "kiso"
+          n = 10
+        when "sougouL"
+          n = 5
+        when "sougouABC"
+          n = 4
+        when "sougouDEF"
+          n = 4
+        when "sougouEX"
+          n = 20
+        end
+      when "文科二類"
+        case @class
+        when "hisshuu"
+          n = 15
+        when "kiso"
+          n = 10
+        when "sougouL"
+          n = 5
+        when "sougouABC"
+          n = 4
+        when "sougouDEF"
+          n = 4
+        when "sougouEX"
+          n = 20
+        end
+      when "文科三類"
+        case @class
+        when "hisshuu"
+          n = 15
+        when "kiso"
+          n = 10
+        when "sougouL"
+          n = 5
+        when "sougouABC"
+          n = 4
+        when "sougouDEF"
+          n = 4
+        when "sougouEX"
+          n = 20
+        end
+      end
+      %>
+      <% unless @score_list %>
+        <% @score_list = Array.new(n+1, Array.new(5,"")) %>
+      <% end %>
+      <% for i in 1..n %>
+        <% save_i = "save" + i.to_s
+        class_name_i = "class_name" + i.to_s
+        score_i = "score" + i.to_s
+        weight_i = "weight" + i.to_s
+        credit_i = "credit" + i.to_s %>
+        <tr>
+          <td>
+            <input type="checkbox" name="<%= save_i %>" value="checked" <% if @score_list[i][0]=="checked" %>checked<% end %>>
+          </td>
+          <td>
+            <input name="<%= class_name_i %>" value="<%= @score_list[i][1] %>">
+          </td>
+          <td>
+            <input name="<%= score_i %>" value="<%= @score_list[i][2] %>">
+          </td>
+          <td>
+            <input name="<%= weight_i %>" value="<%= @score_list[i][3] %>">
+          </td>
+          <td>
+            <input name="<%= credit_i %>" value="<%= @score_list[i][4] %>">
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+
+    <input type="submit" value="登録して次へ">
   <% end %>
 </body>
 
