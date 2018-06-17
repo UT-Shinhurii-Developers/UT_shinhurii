@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -23,6 +24,10 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# UT_shinhurii
+東大の進振りサービスを開発します。
+>>>>>>> origin/master
 =======
 # UT_shinhurii
 東大の進振りサービスを開発します。
