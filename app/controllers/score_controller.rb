@@ -15,7 +15,7 @@ class ScoreController < ApplicationController
       @class = "その他の総合科目"
     end
     if request.post?
-      n = 20
+      n = 30
       @score_list = []
       @score_list[1] = [params[:save1],params[:class_name1],params[:score1],params[:credit1],params[:weight1]]
       @score_list[2] = [params[:save2],params[:class_name2],params[:score2],params[:credit2],params[:weight2]]
@@ -37,6 +37,16 @@ class ScoreController < ApplicationController
       @score_list[18] = [params[:save18],params[:class_name18],params[:score18],params[:credit18],params[:weight18]]
       @score_list[19] = [params[:save19],params[:class_name19],params[:score19],params[:credit19],params[:weight19]]
       @score_list[20] = [params[:save20],params[:class_name20],params[:score20],params[:credit20],params[:weight20]]
+      @score_list[21] = [params[:save21],params[:class_name21],params[:score21],params[:credit21],params[:weight21]]
+      @score_list[22] = [params[:save22],params[:class_name22],params[:score22],params[:credit22],params[:weight22]]
+      @score_list[23] = [params[:save23],params[:class_name23],params[:score23],params[:credit23],params[:weight23]]
+      @score_list[24] = [params[:save24],params[:class_name24],params[:score24],params[:credit24],params[:weight24]]
+      @score_list[25] = [params[:save25],params[:class_name25],params[:score25],params[:credit25],params[:weight25]]
+      @score_list[26] = [params[:save26],params[:class_name26],params[:score26],params[:credit26],params[:weight26]]
+      @score_list[27] = [params[:save27],params[:class_name27],params[:score27],params[:credit27],params[:weight27]]
+      @score_list[28] = [params[:save28],params[:class_name28],params[:score28],params[:credit28],params[:weight28]]
+      @score_list[29] = [params[:save29],params[:class_name29],params[:score29],params[:credit29],params[:weight29]]
+      @score_list[30] = [params[:save30],params[:class_name30],params[:score30],params[:credit30],params[:weight30]]
       @score = Array.new(n)
       for i in 1..n do
         if @score_list[i][0].present?
@@ -79,24 +89,6 @@ class ScoreController < ApplicationController
         if @score[i].present?
           unless @score[i].valid? then
             flash[:notice] = "授業名以外は半角数字で入力してください"
-            render "home/input", :layout => 'input_layout'
-            return
-          end
-        end
-      end
-      for i in 1..n do
-        if @score[i].present?
-          if @score[i].credit == 0
-            flash[:notice] = "単位数が0の授業は入力しないでください"
-            render "home/input", :layout => 'input_layout'
-            return
-          end
-        end
-      end
-      for i in 1..n do
-        if @score[i].present?
-          if @score[i].weight == 0
-            flash[:notice] = "重率が0の授業は入力しないでください"
             render "home/input", :layout => 'input_layout'
             return
           end
@@ -148,7 +140,7 @@ class ScoreController < ApplicationController
       @class = "その他の総合科目"
     end
     if request.post?
-      n = 20
+      n = 30
       @score_list = []
       @score_list[1] = [params[:save1],params[:class_name1],params[:score1],params[:credit1],params[:weight1]]
       @score_list[2] = [params[:save2],params[:class_name2],params[:score2],params[:credit2],params[:weight2]]
@@ -170,6 +162,16 @@ class ScoreController < ApplicationController
       @score_list[18] = [params[:save18],params[:class_name18],params[:score18],params[:credit18],params[:weight18]]
       @score_list[19] = [params[:save19],params[:class_name19],params[:score19],params[:credit19],params[:weight19]]
       @score_list[20] = [params[:save20],params[:class_name20],params[:score20],params[:credit20],params[:weight20]]
+      @score_list[21] = [params[:save21],params[:class_name21],params[:score21],params[:credit21],params[:weight21]]
+      @score_list[22] = [params[:save22],params[:class_name22],params[:score22],params[:credit22],params[:weight22]]
+      @score_list[23] = [params[:save23],params[:class_name23],params[:score23],params[:credit23],params[:weight23]]
+      @score_list[24] = [params[:save24],params[:class_name24],params[:score24],params[:credit24],params[:weight24]]
+      @score_list[25] = [params[:save25],params[:class_name25],params[:score25],params[:credit25],params[:weight25]]
+      @score_list[26] = [params[:save26],params[:class_name26],params[:score26],params[:credit26],params[:weight26]]
+      @score_list[27] = [params[:save27],params[:class_name27],params[:score27],params[:credit27],params[:weight27]]
+      @score_list[28] = [params[:save28],params[:class_name28],params[:score28],params[:credit28],params[:weight28]]
+      @score_list[29] = [params[:save29],params[:class_name29],params[:score29],params[:credit29],params[:weight29]]
+      @score_list[30] = [params[:save30],params[:class_name30],params[:score30],params[:credit30],params[:weight30]]
       @score = Array.new(n)
       for i in 1..n do
         if @score_list[i][0].present?
@@ -274,16 +276,6 @@ class ScoreController < ApplicationController
     end
     unless @score_new.valid? then
       flash[:notice] = "授業名以外は半角数字で入力してください"
-      redirect_to("/user/#{@score.id}/edit")
-      return
-    end
-    if @score_new.credit == 0
-      flash[:notice] = "単位数が0の授業は入力しないでください"
-      redirect_to("/user/#{@score.id}/edit")
-      return
-    end
-    if @score_new.weight == 0
-      flash[:notice] = "重率が0の授業は入力しないでください"
       redirect_to("/user/#{@score.id}/edit")
       return
     end

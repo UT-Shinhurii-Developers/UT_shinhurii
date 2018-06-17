@@ -35,11 +35,42 @@
     </thead>
     <tbody>
       <%
+      @placeholder = Array.new(31).map{Array.new(5,"")}
       case @current_user.karui
       when "理科一類"
         case @class
         when "hisshuu"
-          n = 15
+          n = 30
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール理科","",2,1]
+          @placeholder[11] = ["","基礎実験I","",1,1]
+          @placeholder[12] = ["","基礎実験Ⅱ","",1,1]
+          @placeholder[13] = ["","基礎実験Ⅲ or 基礎生命科学実験","",1,1]
+          @placeholder[14] = ["","基礎実験Ⅳ or 生命科学実験","",1,1]
+          @placeholder[15] = ["","数理科学基礎","",2,1]
+          @placeholder[16] = ["","微分積分学","",3,1]
+          @placeholder[17] = ["","線型代数学","",3,1]
+          @placeholder[18] = ["","数理科学基礎演習","",1,1]
+          @placeholder[19] = ["","微分積分学演習","",1,1]
+          @placeholder[20] = ["","線型代数学演習","",1,1]
+          @placeholder[21] = ["","基礎実験I","",1,1]
+          @placeholder[22] = ["","基礎実験Ⅱ","",1,1]
+          @placeholder[23] = ["","基礎実験Ⅲ or 基礎生命科学実験","",1,1]
+          @placeholder[24] = ["","基礎実験Ⅳ or 生命科学実験","",1,1]
+          @placeholder[25] = ["","数理科学基礎","",2,1]
+          @placeholder[26] = ["","微分積分学","",3,1]
+          @placeholder[27] = ["","線型代数学","",3,1]
+          @placeholder[28] = ["","数理科学基礎演習","",1,1]
+          @placeholder[29] = ["","微分積分学演習","",1,1]
+          @placeholder[30] = ["","線型代数学演習","",1,1]
         when "kiso"
           n = 10
         when "sougouL"
@@ -142,16 +173,16 @@
             <input type="checkbox" name="<%= save_i %>" value="checked" <% if @score_list[i][0]=="checked" %>checked<% end %>>
           </td>
           <td>
-            <input name="<%= class_name_i %>" value="<%= @score_list[i][1] %>">
+            <input name="<%= class_name_i %>" placeholder="<%= @placeholder[i][1] %>" value="<% if @score_list[i][1] == "" %><%= @placeholder[i][1] %><% else %><%= @score_list[i][1] %><% end %>">
           </td>
           <td>
             <input name="<%= score_i %>" value="<%= @score_list[i][2] %>">
           </td>
           <td>
-            <input name="<%= credit_i %>" value="<%= @score_list[i][3] %>">
+            <input name="<%= credit_i %>" placeholder="<%= @placeholder[i][3] %>" value="<% if @score_list[i][1] == "" %><%= @placeholder[i][3] %><% else %><%= @score_list[i][3] %><% end %>">
           </td>
           <td>
-            <input name="<%= weight_i %>" value="<%= @score_list[i][4] %>">
+            <input name="<%= weight_i %>" placeholder="<%= @placeholder[i][4] %>" value="<% if @score_list[i][1] == "" %><%= @placeholder[i][4] %><% else %><%= @score_list[i][4] %><% end %>">
           </td>
         </tr>
       <% end %>

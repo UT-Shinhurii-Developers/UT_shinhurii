@@ -20,7 +20,7 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
       @number = @user.id
       if @number%10 == 0 && @number <= 100
         ReportMailer.send_number_of_users(@number).deliver
-        flash[:notice] = "あなたは" + @number.to_s + "人目の登録者です。"
+        flash[:notice] = "あなたは記念すべき" + @number.to_s + "人目の登録者です。"
       elsif @number % 100 == 0
         ReportMailer.send_number_of_users(@number).deliver
         flash[:notice] = "あなたは記念すべき" + @number + "人目の登録者です。おめでとうございます！！！"

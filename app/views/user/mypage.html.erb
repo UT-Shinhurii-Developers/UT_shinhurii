@@ -6,7 +6,7 @@
 </head>
 
 <body>
-  <h1><%= @current_user.name %>のマイページ</h1>
+  <h1><%= @current_user.name %>の成績表</h1>
   <p>科類：<%= @current_user.karui %></p>
   <p>成績データ</p>
   <% @scores = Score.where(user_name: @current_user.name) %>
@@ -71,8 +71,8 @@
       @credit = @scores.all.map{|score| score.credit}
       @w_c = @weight.zip(@credit).map{|w,c|w*c}
       @s_w_c = @score.zip(@w_c).map{|s,w_c|s*w_c}
-      @result = @s_w_c.sum/@w_c.sum.round(2) %>
-      <%= @result %>点
+      @result = (@s_w_c.sum/@w_c.sum).round(2) %>
+      <% if @result.nan? %>0<% else %><%= @result %><% end %>点
       <p>進振り点を共有する</p>
       <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://ut-shinhurii.herokuapp.com" data-text="進振りサービスUT_Shinhuriiを使ったよ！私の進振り点は<%= @result %>点でした！" data-hashtags="UT_Shinhurii">Tweet</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
