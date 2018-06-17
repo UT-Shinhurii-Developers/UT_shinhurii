@@ -15,3 +15,4 @@
 //SocialShareButtonというgemを使う
 //= require social-share-button
 //= require_tree .
+//= require material-components-web/dist/material-components-web

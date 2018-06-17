@@ -1,5 +1,7 @@
 {
   "name": "Shinhurii_app",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "material-components-web": "^0.36.0"
+  }
 }
