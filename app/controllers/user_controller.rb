@@ -62,7 +62,7 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
   def add
     @class = params[:class]
     case @class
-    when "必修科目","基礎科目","総合科目L","総合科目ABC","総合科目DEF","その他の総合科目" then
+    when "基礎科目","総合科目L","総合科目ABC","総合科目DEF","総合科目ABCD","総合科目EF" then
       return
     else
       flash[:notice] = "無効なURLです"

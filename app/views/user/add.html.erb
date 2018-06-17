@@ -9,8 +9,6 @@
     <h1><%= @class %>の成績を追加</h1>
     <p><%= @class %>の成績を入力してください</p>
     <% case @class
-    when "必修科目"
-      @class = "hisshuu"
     when "基礎科目"
       @class = "kiso"
     when "総合科目L"
@@ -19,8 +17,10 @@
       @class = "sougouABC"
     when "総合科目DEF"
       @class = "sougouDEF"
-    when "その他の総合科目"
-      @class = "sougouEX"
+    when "総合科目ABCD"
+      @class = "sougouABCD"
+    when "総合科目EF"
+      @class = "sougouEF"
     end %>
     <%= form_tag("/score/#{@class}/mypage") do %>
       <table>
@@ -34,100 +34,7 @@
         </tr>
       </thead>
       <tbody>
-        <%
-        case @current_user.karui
-        when "理科一類"
-          case @class
-          when "hisshuu"
-            n = 15
-          when "kiso"
-            n = 10
-          when "sougouL"
-            n = 5
-          when "sougouABC"
-            n = 4
-          when "sougouDEF"
-            n = 4
-          when "sougouEX"
-            n = 20
-          end
-        when "理科二類"
-          case @class
-          when "hisshuu"
-            n = 15
-          when "kiso"
-            n = 10
-          when "sougouL"
-            n = 5
-          when "sougouABC"
-            n = 4
-          when "sougouDEF"
-            n = 4
-          when "sougouEX"
-            n = 20
-          end
-        when "理科三類"
-          case @class
-          when "hisshuu"
-            n = 15
-          when "kiso"
-            n = 10
-          when "sougouL"
-            n = 5
-          when "sougouABC"
-            n = 4
-          when "sougouDEF"
-            n = 4
-          when "sougouEX"
-            n = 20
-          end
-        when "文科一類"
-          case @class
-          when "hisshuu"
-            n = 15
-          when "kiso"
-            n = 10
-          when "sougouL"
-            n = 5
-          when "sougouABC"
-            n = 4
-          when "sougouDEF"
-            n = 4
-          when "sougouEX"
-            n = 20
-          end
-        when "文科二類"
-          case @class
-          when "hisshuu"
-            n = 15
-          when "kiso"
-            n = 10
-          when "sougouL"
-            n = 5
-          when "sougouABC"
-            n = 4
-          when "sougouDEF"
-            n = 4
-          when "sougouEX"
-            n = 20
-          end
-        when "文科三類"
-          case @class
-          when "hisshuu"
-            n = 15
-          when "kiso"
-            n = 10
-          when "sougouL"
-            n = 5
-          when "sougouABC"
-            n = 4
-          when "sougouDEF"
-            n = 4
-          when "sougouEX"
-            n = 20
-          end
-        end
-        %>
+        <% n = 10 %>
         <% unless @score_list %>
           <% @score_list = Array.new(n+1, Array.new(5,"")) %>
         <% end %>
