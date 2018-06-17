@@ -9,8 +9,6 @@
   <h1>成績入力画面</h1>
   <p><%= @class %>の成績を入力してください</p>
   <% case @class
-  when "必修科目"
-    @class = "hisshuu"
   when "基礎科目"
     @class = "kiso"
   when "総合科目L"
@@ -19,8 +17,10 @@
     @class = "sougouABC"
   when "総合科目DEF"
     @class = "sougouDEF"
-  when "その他の総合科目"
-    @class = "sougouEX"
+  when "総合科目ABCD"
+    @class = "sougouABCD"
+  when "総合科目EF"
+    @class = "sougouEF"
   end %>
   <%= form_tag("/score/#{@class}") do %>
     <table>
@@ -39,8 +39,8 @@
       case @current_user.karui
       when "理科一類"
         case @class
-        when "hisshuu"
-          n = 30
+        when "kiso"
+          n = 26
           @placeholder[1] = ["","英語一列①","",1,1]
           @placeholder[2] = ["","英語一列②","",1,1]
           @placeholder[3] = ["","ALESS","",2,1]
@@ -61,101 +61,223 @@
           @placeholder[18] = ["","数理科学基礎演習","",1,1]
           @placeholder[19] = ["","微分積分学演習","",1,1]
           @placeholder[20] = ["","線型代数学演習","",1,1]
-          @placeholder[21] = ["","基礎実験I","",1,1]
-          @placeholder[22] = ["","基礎実験Ⅱ","",1,1]
-          @placeholder[23] = ["","基礎実験Ⅲ or 基礎生命科学実験","",1,1]
-          @placeholder[24] = ["","基礎実験Ⅳ or 生命科学実験","",1,1]
-          @placeholder[25] = ["","数理科学基礎","",2,1]
-          @placeholder[26] = ["","微分積分学","",3,1]
-          @placeholder[27] = ["","線型代数学","",3,1]
-          @placeholder[28] = ["","数理科学基礎演習","",1,1]
-          @placeholder[29] = ["","微分積分学演習","",1,1]
-          @placeholder[30] = ["","線型代数学演習","",1,1]
-        when "kiso"
-          n = 10
+          @placeholder[21] = ["","力学","",2,1]
+          @placeholder[22] = ["","電磁気学","",2,1]
+          @placeholder[23] = ["","熱力学","",2,1]
+          @placeholder[24] = ["","構造化学","",2,1]
+          @placeholder[25] = ["","物性化学","",2,1]
+          @placeholder[26] = ["","生命化学","",1,1]
         when "sougouL"
           n = 5
-        when "sougouABC"
+        when "sougouABCD"
           n = 4
-        when "sougouDEF"
+        when "sougouEF"
           n = 4
-        when "sougouEX"
-          n = 20
         end
       when "理科二類"
         case @class
-        when "hisshuu"
-          n = 15
         when "kiso"
-          n = 10
+          n = 27
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール理科","",2,1]
+          @placeholder[11] = ["","基礎物理学実験","",1,1]
+          @placeholder[12] = ["","基礎化学実験","",1,1]
+          @placeholder[13] = ["","基礎生命科学実験","",1,1]
+          @placeholder[14] = ["","生命科学実験","",1,1]
+          @placeholder[15] = ["","数理科学基礎","",2,1]
+          @placeholder[16] = ["","微分積分学","",3,1]
+          @placeholder[17] = ["","線型代数学","",3,1]
+          @placeholder[18] = ["","数理科学基礎演習","",1,1]
+          @placeholder[19] = ["","微分積分学演習","",1,1]
+          @placeholder[20] = ["","線型代数学演習","",1,1]
+          @placeholder[21] = ["","力学","",2,1]
+          @placeholder[22] = ["","電磁気学","",2,1]
+          @placeholder[23] = ["","化学熱力学","",2,1]
+          @placeholder[24] = ["","構造化学","",2,1]
+          @placeholder[25] = ["","物性化学","",2,1]
+          @placeholder[26] = ["","生命化学Ⅰ","",2,1]
+          @placeholder[27] = ["","生命化学Ⅱ","",2,1]
         when "sougouL"
           n = 5
-        when "sougouABC"
+        when "sougouABCD"
           n = 4
-        when "sougouDEF"
+        when "sougouEF"
           n = 4
-        when "sougouEX"
-          n = 20
         end
       when "理科三類"
         case @class
-        when "hisshuu"
-          n = 15
         when "kiso"
-          n = 10
+          n = 27
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール理科","",2,1]
+          @placeholder[11] = ["","基礎物理学実験","",1,1]
+          @placeholder[12] = ["","基礎化学実験","",1,1]
+          @placeholder[13] = ["","基礎生命科学実験","",1,1]
+          @placeholder[14] = ["","生命科学実験","",1,1]
+          @placeholder[15] = ["","数理科学基礎","",2,1]
+          @placeholder[16] = ["","微分積分学","",3,1]
+          @placeholder[17] = ["","線型代数学","",3,1]
+          @placeholder[18] = ["","数理科学基礎演習","",1,1]
+          @placeholder[19] = ["","微分積分学演習","",1,1]
+          @placeholder[20] = ["","線型代数学演習","",1,1]
+          @placeholder[21] = ["","力学","",2,1]
+          @placeholder[22] = ["","電磁気学","",2,1]
+          @placeholder[23] = ["","化学熱力学","",2,1]
+          @placeholder[24] = ["","構造化学","",2,1]
+          @placeholder[25] = ["","物性化学","",2,1]
+          @placeholder[26] = ["","生命化学Ⅰ","",2,1]
+          @placeholder[27] = ["","生命化学Ⅱ","",2,1]
         when "sougouL"
           n = 5
-        when "sougouABC"
+        when "sougouABCD"
           n = 4
-        when "sougouDEF"
+        when "sougouEF"
           n = 4
-        when "sougouEX"
-          n = 20
         end
       when "文科一類"
         case @class
-        when "hisshuu"
-          n = 15
         when "kiso"
-          n = 10
+          n = 32
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール文科","",2,1]
+          @placeholder[11] = ["","法Ⅰ","",2,1]
+          @placeholder[12] = ["","法Ⅱ","",2,1]
+          @placeholder[13] = ["","政治Ⅰ","",2,1]
+          @placeholder[14] = ["","政治Ⅱ","",2,1]
+          @placeholder[15] = ["","経済Ⅰ","",2,1]
+          @placeholder[16] = ["","経済Ⅱ","",2,1]
+          @placeholder[17] = ["","社会Ⅰ","",2,1]
+          @placeholder[18] = ["","社会Ⅱ","",2,1]
+          @placeholder[19] = ["","数学Ⅰ","",2,1]
+          @placeholder[20] = ["","数学Ⅱ","",2,1]
+          @placeholder[21] = ["","哲学Ⅰ","",2,1]
+          @placeholder[22] = ["","哲学Ⅱ","",2,1]
+          @placeholder[23] = ["","倫理Ⅰ","",2,1]
+          @placeholder[24] = ["","倫理Ⅱ","",2,1]
+          @placeholder[25] = ["","歴史Ⅰ","",2,1]
+          @placeholder[26] = ["","歴史Ⅱ","",2,1]
+          @placeholder[27] = ["","ことばと文学I","",2,1]
+          @placeholder[28] = ["","ことばと文学Ⅱ","",2,1]
+          @placeholder[29] = ["","ことばと文学Ⅲ","",2,1]
+          @placeholder[30] = ["","ことばと文学Ⅳ","",2,1]
+          @placeholder[31] = ["","心理Ⅰ","",2,1]
+          @placeholder[32] = ["","心理Ⅱ","",2,1]
         when "sougouL"
           n = 5
         when "sougouABC"
           n = 4
         when "sougouDEF"
           n = 4
-        when "sougouEX"
-          n = 20
         end
       when "文科二類"
         case @class
-        when "hisshuu"
-          n = 15
         when "kiso"
-          n = 10
+          n = 32
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール文科","",2,1]
+          @placeholder[11] = ["","法Ⅰ","",2,1]
+          @placeholder[12] = ["","法Ⅱ","",2,1]
+          @placeholder[13] = ["","政治Ⅰ","",2,1]
+          @placeholder[14] = ["","政治Ⅱ","",2,1]
+          @placeholder[15] = ["","経済Ⅰ","",2,1]
+          @placeholder[16] = ["","経済Ⅱ","",2,1]
+          @placeholder[17] = ["","社会Ⅰ","",2,1]
+          @placeholder[18] = ["","社会Ⅱ","",2,1]
+          @placeholder[19] = ["","数学Ⅰ","",2,1]
+          @placeholder[20] = ["","数学Ⅱ","",2,1]
+          @placeholder[21] = ["","哲学Ⅰ","",2,1]
+          @placeholder[22] = ["","哲学Ⅱ","",2,1]
+          @placeholder[23] = ["","倫理Ⅰ","",2,1]
+          @placeholder[24] = ["","倫理Ⅱ","",2,1]
+          @placeholder[25] = ["","歴史Ⅰ","",2,1]
+          @placeholder[26] = ["","歴史Ⅱ","",2,1]
+          @placeholder[27] = ["","ことばと文学I","",2,1]
+          @placeholder[28] = ["","ことばと文学Ⅱ","",2,1]
+          @placeholder[29] = ["","ことばと文学Ⅲ","",2,1]
+          @placeholder[30] = ["","ことばと文学Ⅳ","",2,1]
+          @placeholder[31] = ["","心理Ⅰ","",2,1]
+          @placeholder[32] = ["","心理Ⅱ","",2,1]
         when "sougouL"
           n = 5
         when "sougouABC"
           n = 4
         when "sougouDEF"
           n = 4
-        when "sougouEX"
-          n = 20
         end
       when "文科三類"
         case @class
-        when "hisshuu"
-          n = 15
         when "kiso"
-          n = 10
+          n = 32
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール文科","",2,1]
+          @placeholder[11] = ["","法Ⅰ","",2,1]
+          @placeholder[12] = ["","法Ⅱ","",2,1]
+          @placeholder[13] = ["","政治Ⅰ","",2,1]
+          @placeholder[14] = ["","政治Ⅱ","",2,1]
+          @placeholder[15] = ["","経済Ⅰ","",2,1]
+          @placeholder[16] = ["","経済Ⅱ","",2,1]
+          @placeholder[17] = ["","社会Ⅰ","",2,1]
+          @placeholder[18] = ["","社会Ⅱ","",2,1]
+          @placeholder[19] = ["","数学Ⅰ","",2,1]
+          @placeholder[20] = ["","数学Ⅱ","",2,1]
+          @placeholder[21] = ["","哲学Ⅰ","",2,1]
+          @placeholder[22] = ["","哲学Ⅱ","",2,1]
+          @placeholder[23] = ["","倫理Ⅰ","",2,1]
+          @placeholder[24] = ["","倫理Ⅱ","",2,1]
+          @placeholder[25] = ["","歴史Ⅰ","",2,1]
+          @placeholder[26] = ["","歴史Ⅱ","",2,1]
+          @placeholder[27] = ["","ことばと文学I","",2,1]
+          @placeholder[28] = ["","ことばと文学Ⅱ","",2,1]
+          @placeholder[29] = ["","ことばと文学Ⅲ","",2,1]
+          @placeholder[30] = ["","ことばと文学Ⅳ","",2,1]
+          @placeholder[31] = ["","心理Ⅰ","",2,1]
+          @placeholder[32] = ["","心理Ⅱ","",2,1]
         when "sougouL"
           n = 5
         when "sougouABC"
           n = 4
         when "sougouDEF"
           n = 4
-        when "sougouEX"
-          n = 20
         end
       end
       %>

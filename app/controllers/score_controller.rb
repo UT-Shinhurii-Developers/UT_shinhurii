@@ -1,8 +1,6 @@
 class ScoreController < ApplicationController
   def create
     case params[:class_type]
-    when "hisshuu"
-      @class = "必修科目"
     when "kiso"
       @class = "基礎科目"
     when "sougouL"
@@ -11,11 +9,13 @@ class ScoreController < ApplicationController
       @class = "総合科目ABC"
     when "sougouDEF"
       @class = "総合科目DEF"
-    when "sougouEX"
-      @class = "その他の総合科目"
+    when "sougouABCD"
+      @class = "総合科目ABCD"
+    when "sougouEF"
+      @class = "総合科目EF"
     end
     if request.post?
-      n = 30
+      n = 32
       @score_list = []
       @score_list[1] = [params[:save1],params[:class_name1],params[:score1],params[:credit1],params[:weight1]]
       @score_list[2] = [params[:save2],params[:class_name2],params[:score2],params[:credit2],params[:weight2]]
@@ -47,6 +47,8 @@ class ScoreController < ApplicationController
       @score_list[28] = [params[:save28],params[:class_name28],params[:score28],params[:credit28],params[:weight28]]
       @score_list[29] = [params[:save29],params[:class_name29],params[:score29],params[:credit29],params[:weight29]]
       @score_list[30] = [params[:save30],params[:class_name30],params[:score30],params[:credit30],params[:weight30]]
+      @score_list[31] = [params[:save31],params[:class_name31],params[:score31],params[:credit31],params[:weight31]]
+      @score_list[32] = [params[:save32],params[:class_name32],params[:score32],params[:credit32],params[:weight32]]
       @score = Array.new(n)
       for i in 1..n do
         if @score_list[i][0].present?
@@ -55,10 +57,6 @@ class ScoreController < ApplicationController
           else
             flash[:notice] = "チェックをつけた成績データを全て入力してください"
             case params[:class_type]
-            when "hisshuu"
-              @class = "必修科目"
-              render "home/input", :layout => 'input_layout'
-              return
             when "kiso"
               @class = "基礎科目"
               render "home/input", :layout => 'input_layout'
@@ -75,8 +73,12 @@ class ScoreController < ApplicationController
               @class = "総合科目DEF"
               render "home/input", :layout => 'input_layout'
               return
-            when "sougouEX"
-              @class = "その他の総合科目"
+            when "sougouABCD"
+              @class = "総合科目ABCD"
+              render "home/input", :layout => 'input_layout'
+              return
+            when "sougouEF"
+              @class = "総合科目EF"
               render "home/input", :layout => 'input_layout'
               return
             end
@@ -106,19 +108,31 @@ class ScoreController < ApplicationController
       else
         flash[:notice] = @class + "の成績は入力されませんでした"
       end
-      case @class
-      when "必修科目"
-        redirect_to("/input/基礎科目")
-      when "基礎科目"
-        redirect_to("/input/総合科目L")
-      when "総合科目L"
-        redirect_to("/input/総合科目ABC")
-      when "総合科目ABC"
-        redirect_to("/input/総合科目DEF")
-      when "総合科目DEF"
-        redirect_to("/input/その他の総合科目")
-      when "その他の総合科目"
-        redirect_to("/result")
+      case @current_user.karui
+      when "理科一類", "理科二類", "理科三類"
+        case @class
+        when "基礎科目"
+          redirect_to("/input/総合科目L")
+        when "総合科目L"
+          redirect_to("/input/総合科目ABCD")
+        when "総合科目ABCD"
+          redirect_to("/input/総合科目EF")
+        when "総合科目EF"
+          redirect_to("/result")
+        end
+        return
+      else
+        case @class
+        when "基礎科目"
+          redirect_to("/input/総合科目L")
+        when "総合科目L"
+          redirect_to("/input/総合科目ABC")
+        when "総合科目ABC"
+          redirect_to("/input/総合科目DEF")
+        when "総合科目DEF"
+          redirect_to("/result")
+        end
+        return
       end
     else
       render "home/input", :layout => 'input_layout'
@@ -126,8 +140,6 @@ class ScoreController < ApplicationController
   end
   def create_mypage
     case params[:class_type]
-    when "hisshuu"
-      @class = "必修科目"
     when "kiso"
       @class = "基礎科目"
     when "sougouL"
@@ -136,11 +148,13 @@ class ScoreController < ApplicationController
       @class = "総合科目ABC"
     when "sougouDEF"
       @class = "総合科目DEF"
-    when "sougouEX"
-      @class = "その他の総合科目"
+    when "sougouABCD"
+      @class = "総合科目ABCD"
+    when "sougouEF"
+      @class = "総合科目EF"
     end
     if request.post?
-      n = 30
+      n = 32
       @score_list = []
       @score_list[1] = [params[:save1],params[:class_name1],params[:score1],params[:credit1],params[:weight1]]
       @score_list[2] = [params[:save2],params[:class_name2],params[:score2],params[:credit2],params[:weight2]]
@@ -172,6 +186,8 @@ class ScoreController < ApplicationController
       @score_list[28] = [params[:save28],params[:class_name28],params[:score28],params[:credit28],params[:weight28]]
       @score_list[29] = [params[:save29],params[:class_name29],params[:score29],params[:credit29],params[:weight29]]
       @score_list[30] = [params[:save30],params[:class_name30],params[:score30],params[:credit30],params[:weight30]]
+      @score_list[31] = [params[:save31],params[:class_name31],params[:score31],params[:credit31],params[:weight31]]
+      @score_list[32] = [params[:save32],params[:class_name32],params[:score32],params[:credit32],params[:weight32]]
       @score = Array.new(n)
       for i in 1..n do
         if @score_list[i][0].present?
@@ -180,10 +196,6 @@ class ScoreController < ApplicationController
           else
             flash[:notice] = "チェックをつけた成績データを全て入力してください"
             case params[:class_type]
-            when "hisshuu"
-              @class = "必修科目"
-              render "user/add"
-              return
             when "kiso"
               @class = "基礎科目"
               render "user/add"
@@ -200,8 +212,12 @@ class ScoreController < ApplicationController
               @class = "総合科目DEF"
               render "user/add"
               return
-            when "sougouEX"
-              @class = "その他の総合科目"
+            when "sougouABCD"
+              @class = "総合科目ABCD"
+              render "user/add"
+              return
+            when "sougouEF"
+              @class = "総合科目EF"
               render "user/add"
               return
             end
@@ -214,24 +230,6 @@ class ScoreController < ApplicationController
         if @score[i].present?
           unless @score[i].valid? then
             flash[:notice] = "授業名以外は半角数字で入力してください"
-            render "user/add"
-            return
-          end
-        end
-      end
-      for i in 1..n do
-        if @score[i].present?
-          if @score[i].credit == 0
-            flash[:notice] = "単位数が0の授業は入力しないでください"
-            render "user/add"
-            return
-          end
-        end
-      end
-      for i in 1..n do
-        if @score[i].present?
-          if @score[i].weight == 0
-            flash[:notice] = "重率が0の授業は入力しないでください"
             render "user/add"
             return
           end
