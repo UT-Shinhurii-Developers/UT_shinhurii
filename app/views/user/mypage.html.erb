@@ -111,7 +111,7 @@
       <br>
     <% end %>
     <% end %>
-    <li>進振り点</li>
+    <li>基本平均点</li>
     <%
     @scores = Score.where(user_name: @current_user.name)
     if @scores.any?

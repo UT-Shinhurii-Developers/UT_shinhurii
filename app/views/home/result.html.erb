@@ -16,7 +16,7 @@
     @w_c = @weight.zip(@credit).map{|w,c|w*c}
     @s_w_c = @score.zip(@w_c).map{|s,w_c|s*w_c}
     @result = @s_w_c.sum/@w_c.sum.round(2) %>
-    <p>あなたの進振り点はこちらです。</p>
+    <p>あなたの基本平均点はこちらです。</p>
     <%= @result %>点
     <p>結果を共有する</p>
     <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://ut-shinhurii.herokuapp.com" data-text="進振りサービスUT_Shinhuriiを使ったよ！私の進振り点は<%= @result %>点でした！" data-hashtags="UT_Shinhurii">Tweet</a>
