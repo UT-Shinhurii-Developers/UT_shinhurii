@@ -69,3 +69,9 @@ gem 'social-share-button'
 
 #Materializedを追加するgem
 gem 'materialize-sass'
+
+#Material Iconsを追加するgem
+gem 'material_icons' 
+
+#jQueryを追加するgem
+gem "jquery-rails"
