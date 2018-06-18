@@ -66,3 +66,6 @@ gem 'rails-i18n'
 
 #SNSボタンを追加するgem
 gem 'social-share-button'
+
+#Materializedを追加するgem
+gem 'materialize-sass'
