@@ -1,6 +1,6 @@
 class UserController < ApplicationController
 
-before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add, :edit]}
+before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add, :edit, :department]}
 
   def new
     @user = User.new
@@ -62,7 +62,7 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
   def add
     @class = params[:class]
     case @class
-    when "基礎科目","総合科目L","総合科目ABC","総合科目DEF","総合科目ABCD","総合科目EF" then
+    when "基礎科目","総合科目L","総合科目A","総合科目B","総合科目C","総合科目D","総合科目E","総合科目F" then
       return
     else
       flash[:notice] = "無効なURLです"
@@ -71,5 +71,9 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
   end
   def edit
     @score = Score.find_by(id:params[:id])
+  end
+  def department
+    #保存処理
+    redirect_to("/result")
   end
 end

@@ -13,23 +13,22 @@
         <tr>
           <th>授業名</th>
           <th>点数</th>
-          <th>単位数</th>
-          <th>重率</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
-            <input name="class_name" value="<%= @score.class_name %>">
+            <input type="hidden" name="class_name" value="<%= @score.class_name %>">
+            <%= @score.class_name %>
           </td>
           <td>
             <input name="score" value="<%= @score.score %>">
           </td>
           <td>
-            <input name="credit" value="<%= @score.credit %>">
+            <input type="hidden" name="credit" value="<%= @score.credit %>">
           </td>
           <td>
-            <input name="weight" value="<%= @score.weight %>">
+            <input type="hidden" name="weight" value="<%= @score.weight %>">
           </td>
         </tr>
       </tbody>

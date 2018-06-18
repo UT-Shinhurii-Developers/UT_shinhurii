@@ -1,36 +1,44 @@
 <html>
 
 <head>
-  <title>成績入力画面</title>
+  <% if @class.present? %>
+    <title>成績入力画面</title>
+  <% else %>
+    <title><%= @class_add %>の成績を追加</title>
+  <% end %>
   <meta charset="utf-8">
 </head>
 
 <body>
-  <h1>成績入力画面</h1>
-  <p><%= @class %>の成績を入力してください</p>
-  <% case @class
-  when "基礎科目"
-    @class = "kiso"
-  when "総合科目L"
-    @class = "sougouL"
-  when "総合科目ABC"
-    @class = "sougouABC"
-  when "総合科目DEF"
-    @class = "sougouDEF"
-  when "総合科目ABCD"
-    @class = "sougouABCD"
-  when "総合科目EF"
-    @class = "sougouEF"
-  end %>
-  <%= form_tag("/score/#{@class}") do %>
+  <% if @class.present? %><!--inputから来た場合-->
+    <h1>成績入力画面</h1>
+    <p><%= @class %>の成績を入力してください</p>
+    <%
+    case @class
+    when "基礎科目"
+      @class = "kiso"
+    when "総合科目L"
+      @class = "sougouL"
+    when "総合科目A"
+      @class = "sougouA"
+    when "総合科目B"
+      @class = "sougouB"
+    when "総合科目C"
+      @class = "sougouC"
+    when "総合科目D"
+      @class = "sougouD"
+    when "総合科目E"
+      @class = "sougouE"
+    when "総合科目F"
+      @class = "sougouF"
+    end %>
+    <%= form_tag("/score/#{@class}") do %>
     <table>
     <thead>
       <tr>
         <th>登録</th>
         <th>授業名</th>
         <th>点数</th>
-        <th>単位数</th>
-        <th>重率</th>
       </tr>
     </thead>
     <tbody>
@@ -38,9 +46,8 @@
       @placeholder = Array.new(31).map{Array.new(5,"")}
       case @current_user.karui
       when "理科一類"
-        case @class
-        when "kiso"
-          n = 26
+        if @class == "kiso"
+          n = 28
           @placeholder[1] = ["","英語一列①","",1,1]
           @placeholder[2] = ["","英語一列②","",1,1]
           @placeholder[3] = ["","ALESS","",2,1]
@@ -49,34 +56,29 @@
           @placeholder[6] = ["","中国語一列②","",2,1]
           @placeholder[7] = ["","中国語二列","",2,1]
           @placeholder[8] = ["","情報","",2,1]
-          @placeholder[9] = ["","スポ身","",2,1]
-          @placeholder[10] = ["","初年度ゼミナール理科","",2,1]
+          @placeholder[9] = ["","身体運動・健康科学実習Ⅰ","",2,1]
+          @placeholder[10] = ["","身体運動・健康科学実習Ⅱ","",2,1]
           @placeholder[11] = ["","基礎実験I","",1,1]
           @placeholder[12] = ["","基礎実験Ⅱ","",1,1]
-          @placeholder[13] = ["","基礎実験Ⅲ or 基礎生命科学実験","",1,1]
-          @placeholder[14] = ["","基礎実験Ⅳ or 生命科学実験","",1,1]
-          @placeholder[15] = ["","数理科学基礎","",2,1]
-          @placeholder[16] = ["","微分積分学","",3,1]
-          @placeholder[17] = ["","線型代数学","",3,1]
-          @placeholder[18] = ["","数理科学基礎演習","",1,1]
-          @placeholder[19] = ["","微分積分学演習","",1,1]
-          @placeholder[20] = ["","線型代数学演習","",1,1]
-          @placeholder[21] = ["","力学","",2,1]
-          @placeholder[22] = ["","電磁気学","",2,1]
-          @placeholder[23] = ["","熱力学","",2,1]
-          @placeholder[24] = ["","構造化学","",2,1]
-          @placeholder[25] = ["","物性化学","",2,1]
-          @placeholder[26] = ["","生命化学","",1,1]
-        when "sougouL"
-          n = 5
-        when "sougouABCD"
-          n = 4
-        when "sougouEF"
-          n = 4
+          @placeholder[13] = ["","基礎実験Ⅲ","",1,1]
+          @placeholder[14] = ["","基礎生命科学実験","",1,1]
+          @placeholder[15] = ["","基礎実験Ⅳ","",1,1]
+          @placeholder[16] = ["","生命科学実験","",1,1]
+          @placeholder[17] = ["","数理科学基礎","",2,1]
+          @placeholder[18] = ["","微分積分学","",3,1]
+          @placeholder[19] = ["","線型代数学","",3,1]
+          @placeholder[20] = ["","数理科学基礎演習","",1,1]
+          @placeholder[21] = ["","微分積分学演習","",1,1]
+          @placeholder[22] = ["","線型代数学演習","",1,1]
+          @placeholder[23] = ["","力学","",2,1]
+          @placeholder[24] = ["","電磁気学","",2,1]
+          @placeholder[25] = ["","熱力学","",2,1]
+          @placeholder[26] = ["","構造化学","",2,1]
+          @placeholder[27] = ["","物性化学","",2,1]
+          @placeholder[28] = ["","生命化学","",1,1]
         end
       when "理科二類"
-        case @class
-        when "kiso"
+        if @class == "kiso"
           n = 27
           @placeholder[1] = ["","英語一列①","",1,1]
           @placeholder[2] = ["","英語一列②","",1,1]
@@ -105,16 +107,9 @@
           @placeholder[25] = ["","物性化学","",2,1]
           @placeholder[26] = ["","生命化学Ⅰ","",2,1]
           @placeholder[27] = ["","生命化学Ⅱ","",2,1]
-        when "sougouL"
-          n = 5
-        when "sougouABCD"
-          n = 4
-        when "sougouEF"
-          n = 4
         end
       when "理科三類"
-        case @class
-        when "kiso"
+        if @class == "kiso"
           n = 27
           @placeholder[1] = ["","英語一列①","",1,1]
           @placeholder[2] = ["","英語一列②","",1,1]
@@ -143,16 +138,9 @@
           @placeholder[25] = ["","物性化学","",2,1]
           @placeholder[26] = ["","生命化学Ⅰ","",2,1]
           @placeholder[27] = ["","生命化学Ⅱ","",2,1]
-        when "sougouL"
-          n = 5
-        when "sougouABCD"
-          n = 4
-        when "sougouEF"
-          n = 4
         end
       when "文科一類"
-        case @class
-        when "kiso"
+        if @class == "kiso"
           n = 32
           @placeholder[1] = ["","英語一列①","",1,1]
           @placeholder[2] = ["","英語一列②","",1,1]
@@ -186,16 +174,9 @@
           @placeholder[30] = ["","ことばと文学Ⅳ","",2,1]
           @placeholder[31] = ["","心理Ⅰ","",2,1]
           @placeholder[32] = ["","心理Ⅱ","",2,1]
-        when "sougouL"
-          n = 5
-        when "sougouABC"
-          n = 4
-        when "sougouDEF"
-          n = 4
         end
       when "文科二類"
-        case @class
-        when "kiso"
+        if @class == "kiso"
           n = 32
           @placeholder[1] = ["","英語一列①","",1,1]
           @placeholder[2] = ["","英語一列②","",1,1]
@@ -229,16 +210,9 @@
           @placeholder[30] = ["","ことばと文学Ⅳ","",2,1]
           @placeholder[31] = ["","心理Ⅰ","",2,1]
           @placeholder[32] = ["","心理Ⅱ","",2,1]
-        when "sougouL"
-          n = 5
-        when "sougouABC"
-          n = 4
-        when "sougouDEF"
-          n = 4
         end
       when "文科三類"
-        case @class
-        when "kiso"
+        if @class == "kiso"
           n = 32
           @placeholder[1] = ["","英語一列①","",1,1]
           @placeholder[2] = ["","英語一列②","",1,1]
@@ -272,13 +246,252 @@
           @placeholder[30] = ["","ことばと文学Ⅳ","",2,1]
           @placeholder[31] = ["","心理Ⅰ","",2,1]
           @placeholder[32] = ["","心理Ⅱ","",2,1]
-        when "sougouL"
-          n = 5
-        when "sougouABC"
-          n = 4
-        when "sougouDEF"
-          n = 4
         end
+      end
+      case @class
+      when "sougouL"
+        n = 18
+        @placeholder[1] = ["","外国語初級(ターム)","",1,1]
+        @placeholder[2] = ["","外国語初級(ターム)","",1,1]
+        @placeholder[3] = ["","外国語初級(セメスター)","",2,1]
+        @placeholder[4] = ["","外国語初級(セメスター)","",2,1]
+        @placeholder[5] = ["","外国語中級(ターム)","",1,1]
+        @placeholder[6] = ["","外国語中級(ターム)","",1,1]
+        @placeholder[7] = ["","外国語中級(セメスター)","",2,1]
+        @placeholder[8] = ["","外国語中級(セメスター)","",2,1]
+        @placeholder[9] = ["","外国語上級(ターム)","",1,1]
+        @placeholder[10] = ["","外国語上級(ターム)","",1,1]
+        @placeholder[11] = ["","外国語上級(セメスター)","",2,1]
+        @placeholder[12] = ["","外国語上級(セメスター)","",2,1]
+        @placeholder[13] = ["","古典語初級Ⅰ","",2,1]
+        @placeholder[14] = ["","古典語初級Ⅱ","",2,1]
+        @placeholder[15] = ["","古典語中級Ⅰ","",2,1]
+        @placeholder[16] = ["","古典語中級Ⅱ","",2,1]
+        @placeholder[17] = ["","古典日本語","",2,1]
+        @placeholder[18] = ["","古典中国語","",2,1]
+      when "sougouA"
+        n = 36
+        @placeholder[1] = ["","言語構造論(ターム)","",1,1]
+        @placeholder[2] = ["","言語構造論(セメスター)","",2,1]
+        @placeholder[3] = ["","言語比較論(ターム)","",1,1]
+        @placeholder[4] = ["","言語比較論(セメスター)","",2,1]
+        @placeholder[5] = ["","言語応用論(ターム)","",1,1]
+        @placeholder[6] = ["","言語応用論(セメスター)","",2,1]
+        @placeholder[7] = ["","記号論(ターム)","",1,1]
+        @placeholder[8] = ["","記号論(セメスター)","",2,1]
+        @placeholder[9] = ["","翻訳論(ターム)","",1,1]
+        @placeholder[10] = ["","翻訳論(セメスター)","",2,1]
+        @placeholder[11] = ["","言語態理論(ターム)","",1,1]
+        @placeholder[12] = ["","言語態理論(セメスター)","",2,1]
+        @placeholder[13] = ["","外国文学","",2,1]
+        @placeholder[14] = ["","言語文化論(ターム)","",1,1]
+        @placeholder[15] = ["","言語文化論(セメスター)","",2,1]
+        @placeholder[16] = ["","現代哲学","",2,1]
+        @placeholder[17] = ["","科学哲学","",2,1]
+        @placeholder[18] = ["","現代思想","",2,1]
+        @placeholder[19] = ["","記号論理学I","",2,1]
+        @placeholder[20] = ["","記号論理学Ⅱ","",2,1]
+        @placeholder[21] = ["","精神分析学","",2,1]
+        @placeholder[22] = ["","表象文化論","",2,1]
+        @placeholder[23] = ["","演劇論Ⅰ","",2,1]
+        @placeholder[24] = ["","演劇論Ⅱ","",2,1]
+        @placeholder[25] = ["","美術論","",2,1]
+        @placeholder[26] = ["","映画論","",2,1]
+        @placeholder[27] = ["","音楽論","",2,1]
+        @placeholder[28] = ["","比較文化論","",2,1]
+        @placeholder[29] = ["","比較文学","",2,1]
+        @placeholder[30] = ["","比較思想","",2,1]
+        @placeholder[31] = ["","比較芸術","",2,1]
+        @placeholder[32] = ["","東洋思想史","",2,1]
+        @placeholder[33] = ["","西洋思想史","",2,1]
+        @placeholder[34] = ["","経済思想史","",2,1]
+        @placeholder[35] = ["","社会思想史","",2,1]
+        @placeholder[36] = ["","科学史","",2,1]
+      when "sougouB"
+        n = 30
+        @placeholder[1] = ["","国際関係論","",2,1]
+        @placeholder[2] = ["","国際関係史","",2,1]
+        @placeholder[3] = ["","現代国際社会論","",2,1]
+        @placeholder[4] = ["","平和構築論","",2,1]
+        @placeholder[5] = ["","地域文化論Ⅰ(ターム)","",1,1]
+        @placeholder[6] = ["","地域文化論Ⅰ(セメスター)","",2,1]
+        @placeholder[7] = ["","地域文化論Ⅰ(ターム)","",1,1]
+        @placeholder[8] = ["","地域文化論Ⅱ(セメスター)","",2,1]
+        @placeholder[9] = ["","比較地域史(ターム)","",1,1]
+        @placeholder[10] = ["","比較地域史(セメスター)","",2,1]
+        @placeholder[11] = ["","日本文化論Ⅰ","",2,1]
+        @placeholder[12] = ["","日本文化論Ⅱ","",2,1]
+        @placeholder[13] = ["","日本語日本文学Ⅰ","",1,1]
+        @placeholder[14] = ["","日本語日本文学Ⅱ","",2,1]
+        @placeholder[15] = ["","東洋古典学","",2,1]
+        @placeholder[16] = ["","西洋古典学","",2,1]
+        @placeholder[17] = ["","歴史社会論(ターム)","",1,1]
+        @placeholder[18] = ["","歴史社会論(セメスター)","",2,1]
+        @placeholder[19] = ["","近現代史(ターム)","",1,1]
+        @placeholder[20] = ["","近現代史(セメスター)","",2,1]
+        @placeholder[21] = ["","歴史と文化(ターム)","",1,1]
+        @placeholder[22] = ["","歴史と文化(セメスター)","",2,1]
+        @placeholder[23] = ["","世界史論(ターム)","",1,1]
+        @placeholder[24] = ["","世界史論(セメスター)","",2,1]
+        @placeholder[25] = ["","文化人類学Ⅰ","",2,1]
+        @placeholder[26] = ["","文化人類学Ⅱ","",2,1]
+        @placeholder[27] = ["","民族文化論(ターム)","",1,1]
+        @placeholder[28] = ["","民族文化論(セメスター)","",2,1]
+        @placeholder[29] = ["","現代文化人類学(ターム)","",1,1]
+        @placeholder[30] = ["","現代文化人類学(セメスター)","",2,1]
+      when "sougouC"
+        n = 15
+        @placeholder[1] = ["","法と社会","",2,1]
+        @placeholder[2] = ["","日本国憲法","",2,1]
+        @placeholder[3] = ["","現代社会論","",2,1]
+        @placeholder[4] = ["","比較社会論","",2,1]
+        @placeholder[5] = ["","ジェンダー論","",2,1]
+        @placeholder[10] = ["","適応行動論","",2,1]
+        @placeholder[11] = ["","社会行動論","",2,1]
+        @placeholder[12] = ["","スポーツ・身体運動実習","",1,1]
+        @placeholder[13] = ["","スポーツ・身体運動実習Ⅱ","",1,1]
+        @placeholder[14] = ["","身体運動科学","",2,1]
+        @placeholder[15] = ["","健康スポーツ医学","",2,1]
+        @placeholder[16] = ["","身体生命科学","",2,1]
+        @placeholder[17] = ["","身体運動メカニクス","",2,1]
+        @placeholder[18] = ["","情報メディア基礎論","",2,1]
+        @placeholder[19] = ["","情報メディア伝達論","",2,1]
+        @placeholder[20] = ["","情報メディア表現論","",2,1]
+        @placeholder[21] = ["","科学技術基礎論Ⅰ(ターム)","",1,1]
+        @placeholder[22] = ["","科学技術基礎論Ⅰ(セメスター)","",2,1]
+        @placeholder[23] = ["","科学技術基礎論Ⅱ(ターム)","",1,1]
+        @placeholder[24] = ["","科学技術基礎論Ⅱ(セメスター)","",2,1]
+        @placeholder[25] = ["","現代倫理(ターム)","",1,1]
+        @placeholder[26] = ["","現代倫理(セメスター)","",2,1]
+        @placeholder[27] = ["","科学技術社会論","",2,1]
+        @placeholder[28] = ["","システム論","",2,1]
+        @placeholder[29] = ["","現代工学概論","",2,1]
+        @placeholder[30] = ["","現代工学基礎Ⅰ(ターム)","",1,1]
+        @placeholder[31] = ["","現代工学基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[32] = ["","現代工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[33] = ["","現代工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[34] = ["","社会システム工学基礎Ⅰ(ターム)","",1,1]
+        @placeholder[35] = ["","社会システム工学基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[36] = ["","社会システム工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[37] = ["","社会システム工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[38] = ["","総合工学基礎Ⅰ(ターム)","",1,1]
+        @placeholder[39] = ["","総合工学基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[40] = ["","総合工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[41] = ["","総合工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[42] = ["","生体医工学基礎Ⅰ(ターム)","",1,1]
+        @placeholder[43] = ["","生体医工学基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[44] = ["","生体医工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[45] = ["","生体医工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[46] = ["","環境・エネルギー工学概論","",2,1]
+        @placeholder[47] = ["","環境・エネルギー工学基礎Ⅰ(ターム)","",1,1]
+        @placeholder[48] = ["","環境・エネルギー工学基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[49] = ["","環境・エネルギー工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[50] = ["","環境・エネルギー工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[51] = ["","ヘルス・サイエンス概論","",2,1]
+        @placeholder[52] = ["","看護学概論Ⅰ","",2,1]
+        @placeholder[53] = ["","看護学概論Ⅱ","",2,1]
+        @placeholder[54] = ["","環境と生物資源(ターム)","",1,1]
+        @placeholder[55] = ["","環境と生物資源(セメスター)","",2,1]
+        @placeholder[56] = ["","食糧と環境(ターム)","",1,1]
+        @placeholder[57] = ["","食糧と環境(セメスター)","",2,1]
+        @placeholder[58] = ["","森林環境資源学","",2,1]
+        @placeholder[59] = ["","水と土の環境科学","",2,1]
+        @placeholder[60] = ["","放射線環境科学","",2,1]
+        @placeholder[61] = ["","住環境の科学","",1,1]
+        @placeholder[62] = ["","教育心理学の世界","",2,1]
+        @placeholder[63] = ["","心身の実践科学","",2,1]
+        @placeholder[64] = ["","臨床心理学概論","",2,1]
+      when "sougouE"
+        n = 56
+        @placeholder[1] = ["","振動・波動論","",2,1]
+        @placeholder[2] = ["","解析力学","",2,1]
+        @placeholder[3] = ["","相対論","",2,1]
+        @placeholder[4] = ["","量子論","",2,1]
+        @placeholder[5] = ["","統計物理学","",2,1]
+        @placeholder[6] = ["","現代物理学","",2,1]
+        @placeholder[7] = ["","物理科学Ⅰ","",2,1]
+        @placeholder[8] = ["","物理科学Ⅱ","",2,1]
+        @placeholder[9] = ["","有機反応化学","",2,1]
+        @placeholder[10] = ["","化学平衡と反応速度","",2,1]
+        @placeholder[11] = ["","超分子化学","",2,1]
+        @placeholder[12] = ["","物質化学","",2,1]
+        @placeholder[13] = ["","分子システムの化学","",2,1]
+        @placeholder[14] = ["","基礎方程式とその意味","",2,1]
+        @placeholder[15] = ["","分子化学概論","",2,1]
+        @placeholder[16] = ["","化学薬学概論","",1,1]
+        @placeholder[17] = ["","物質・生命工学概論","",2,1]
+        @placeholder[18] = ["","物質・生命工学基礎ⅠA(ターム)","",1,1]
+        @placeholder[19] = ["","物質・生命工学基礎ⅠA(セメスター)","",2,1]
+        @placeholder[20] = ["","物質・生命工学基礎ⅠB(ターム)","",1,1]
+        @placeholder[21] = ["","物質・生命工学基礎ⅠB(セメスター)","",2,1]
+        @placeholder[22] = ["","物質・生命工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[23] = ["","物質・生命工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[24] = ["","動物科学","",1,1]
+        @placeholder[25] = ["","植物科学","",1,1]
+        @placeholder[26] = ["","進化学","",2,1]
+        @placeholder[27] = ["","現代生命科学Ⅰ","",1,1]
+        @placeholder[28] = ["","現代生命科学Ⅱ","",1,1]
+        @placeholder[29] = ["","分子生命科学","",2,1]
+        @placeholder[30] = ["","現代生物学","",2,1]
+        @placeholder[31] = ["","人類科学","",2,1]
+        @placeholder[32] = ["","生物情報科学","",2,1]
+        @placeholder[33] = ["","生物薬学概論","",1,1]
+        @placeholder[34] = ["","惑星地球科学Ⅰ","",2,1]
+        @placeholder[35] = ["","惑星地球科学Ⅱ","",2,1]
+        @placeholder[36] = ["","地球惑星物理学入門","",2,1]
+        @placeholder[37] = ["","地球惑星環境学入門","",2,1]
+        @placeholder[38] = ["","惑星地球科学実習","",2,1]
+        @placeholder[39] = ["","宇宙科学Ⅰ","",2,1]
+        @placeholder[40] = ["","宇宙科学Ⅱ","",2,1]
+        @placeholder[41] = ["","宇宙科学実習Ⅰ","",2,1]
+        @placeholder[42] = ["","宇宙科学実習Ⅱ","",2,1]
+        @placeholder[43] = ["","惑星地球科学Ⅰ","",2,1]
+        @placeholder[44] = ["","惑星地球科学Ⅱ","",2,1]
+        @placeholder[45] = ["","宇宙科学Ⅰ","",2,1]
+        @placeholder[46] = ["","微生物の科学","",2,1]
+        @placeholder[47] = ["","アグリバイオロジー","",1,1]
+        @placeholder[48] = ["","植物医科学","",2,1]
+        @placeholder[49] = ["","応用動物科学Ⅰ","",2,1]
+        @placeholder[50] = ["","応用動物科学Ⅱ","",2,1]
+        @placeholder[51] = ["","食の科学","",1,1]
+        @placeholder[52] = ["","海の生命科学","",2,1]
+        @placeholder[53] = ["","天然物の科学","",1,1]
+        @placeholder[54] = ["","生物素材の科学","",1,1]
+        @placeholder[55] = ["","森の生物学","",2,1]
+        @placeholder[56] = ["","自然現象とモデル","",2,1]
+        @placeholder[57] = ["","生物物理学","",2,1]
+      when "sougouF"
+        n = 30
+        @placeholder[1] = ["","微分積分学続論","",2,1]
+        @placeholder[2] = ["","常微分方程式","",2,1]
+        @placeholder[3] = ["","ベクトル解析","",2,1]
+        @placeholder[4] = ["","解析学基礎","",2,1]
+        @placeholder[5] = ["","数理科学概論Ⅰ","",2,1]
+        @placeholder[6] = ["","数理科学概論Ⅱ","",2,1]
+        @placeholder[7] = ["","数理科学概論Ⅲ","",2,1]
+        @placeholder[8] = ["","数理工学入門(ターム)","",1,1]
+        @placeholder[9] = ["","数理工学入門(セメスター)","",2,1]
+        @placeholder[10] = ["","統計データ解析Ⅰ","",2,1]
+        @placeholder[11] = ["","統計データ解析Ⅱ","",2,1]
+        @placeholder[12] = ["","図形科学A","",2,1]
+        @placeholder[13] = ["","図形科学B","",2,1]
+        @placeholder[14] = ["","図形科学演習Ⅰ","",2,1]
+        @placeholder[15] = ["","図形科学演習Ⅱ","",2,1]
+        @placeholder[16] = ["","基礎統計","",2,1]
+        @placeholder[17] = ["","統計分析","",2,1]
+        @placeholder[18] = ["","アルゴリズム入門","",2,1]
+        @placeholder[19] = ["","計算機プログラミング","",2,1]
+        @placeholder[20] = ["","計算機システム概論","",2,1]
+        @placeholder[21] = ["","計算の理論","",2,1]
+        @placeholder[22] = ["","情報・システム工学概論","",1,1]
+        @placeholder[23] = ["","情報システム基礎Ⅰ(ターム)","",1,1]
+        @placeholder[24] = ["","情報システム基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[25] = ["","情報システム基礎Ⅱ(ターム)","",1,1]
+        @placeholder[26] = ["","情報システム基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[27] = ["","モデリングとシミュレーション基礎Ⅰ(ターム)","",1,1]
+        @placeholder[28] = ["","モデリングとシミュレーション基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[29] = ["","モデリングとシミュレーション基礎Ⅱ(ターム)","",1,1]
+        @placeholder[30] = ["","モデリングとシミュレーション基礎Ⅱ(セメスター)","",2,1]
       end
       %>
       <% unless @score_list %>
@@ -292,26 +505,563 @@
         weight_i = "weight" + i.to_s %>
         <tr>
           <td>
-            <input type="checkbox" name="<%= save_i %>" value="checked" <% if @score_list[i][0]=="checked" %>checked<% end %>>
+            <input type="checkbox" id="<%= i %>" name="<%= save_i %>" value="checked" <% if @score_list[i][0]=="checked" %>checked<% end %>>
           </td>
           <td>
-            <input name="<%= class_name_i %>" placeholder="<%= @placeholder[i][1] %>" value="<% if @score_list[i][1] == "" %><%= @placeholder[i][1] %><% else %><%= @score_list[i][1] %><% end %>">
+            <input type="hidden" name="<%= class_name_i %>" value="<%= @placeholder[i][1] %>">
+            <label for="<%= i %>"><%= @placeholder[i][1] %></label>
           </td>
           <td>
             <input name="<%= score_i %>" value="<%= @score_list[i][2] %>">
           </td>
           <td>
-            <input name="<%= credit_i %>" placeholder="<%= @placeholder[i][3] %>" value="<% if @score_list[i][1] == "" %><%= @placeholder[i][3] %><% else %><%= @score_list[i][3] %><% end %>">
+            <input type="hidden" name="<%= credit_i %>" value="<%= @placeholder[i][3] %>">
           </td>
           <td>
-            <input name="<%= weight_i %>" placeholder="<%= @placeholder[i][4] %>" value="<% if @score_list[i][1] == "" %><%= @placeholder[i][4] %><% else %><%= @score_list[i][4] %><% end %>">
+            <input type="hidden" name="<%= weight_i %>" value="<%= @placeholder[i][4] %>">
           </td>
         </tr>
       <% end %>
     </tbody>
     </table>
-
     <input type="submit" value="登録して次へ">
+    <% end %>
+  <% else %><!--addから来た場合-->
+    <h1>成績追加画面</h1>
+    <p><%= @class_add %>の成績を入力してください</p>
+    <%
+    case @class_add
+    when "基礎科目"
+      @class = "kiso"
+    when "総合科目L"
+      @class = "sougouL"
+    when "総合科目A"
+      @class = "sougouA"
+    when "総合科目B"
+      @class = "sougouB"
+    when "総合科目C"
+      @class = "sougouC"
+    when "総合科目D"
+      @class = "sougouD"
+    when "総合科目E"
+      @class = "sougouE"
+    when "総合科目F"
+      @class = "sougouF"
+    end %>
+    <%= form_tag("/score/#{@class}/mypage") do %>
+    <table>
+    <thead>
+      <tr>
+        <th>登録</th>
+        <th>授業名</th>
+        <th>点数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+      @placeholder = Array.new(31).map{Array.new(5,"")}
+      case @current_user.karui
+      when "理科一類"
+        if @class == "kiso"
+          n = 28
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","身体運動・健康科学実習Ⅰ","",2,1]
+          @placeholder[10] = ["","身体運動・健康科学実習Ⅱ","",2,1]
+          @placeholder[11] = ["","基礎実験I","",1,1]
+          @placeholder[12] = ["","基礎実験Ⅱ","",1,1]
+          @placeholder[13] = ["","基礎実験Ⅲ","",1,1]
+          @placeholder[14] = ["","基礎生命科学実験","",1,1]
+          @placeholder[15] = ["","基礎実験Ⅳ","",1,1]
+          @placeholder[16] = ["","生命科学実験","",1,1]
+          @placeholder[17] = ["","数理科学基礎","",2,1]
+          @placeholder[18] = ["","微分積分学","",3,1]
+          @placeholder[19] = ["","線型代数学","",3,1]
+          @placeholder[20] = ["","数理科学基礎演習","",1,1]
+          @placeholder[21] = ["","微分積分学演習","",1,1]
+          @placeholder[22] = ["","線型代数学演習","",1,1]
+          @placeholder[23] = ["","力学","",2,1]
+          @placeholder[24] = ["","電磁気学","",2,1]
+          @placeholder[25] = ["","熱力学","",2,1]
+          @placeholder[26] = ["","構造化学","",2,1]
+          @placeholder[27] = ["","物性化学","",2,1]
+          @placeholder[28] = ["","生命化学","",1,1]
+        end
+      when "理科二類"
+        if @class == "kiso"
+          n = 27
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール理科","",2,1]
+          @placeholder[11] = ["","基礎物理学実験","",1,1]
+          @placeholder[12] = ["","基礎化学実験","",1,1]
+          @placeholder[13] = ["","基礎生命科学実験","",1,1]
+          @placeholder[14] = ["","生命科学実験","",1,1]
+          @placeholder[15] = ["","数理科学基礎","",2,1]
+          @placeholder[16] = ["","微分積分学","",3,1]
+          @placeholder[17] = ["","線型代数学","",3,1]
+          @placeholder[18] = ["","数理科学基礎演習","",1,1]
+          @placeholder[19] = ["","微分積分学演習","",1,1]
+          @placeholder[20] = ["","線型代数学演習","",1,1]
+          @placeholder[21] = ["","力学","",2,1]
+          @placeholder[22] = ["","電磁気学","",2,1]
+          @placeholder[23] = ["","化学熱力学","",2,1]
+          @placeholder[24] = ["","構造化学","",2,1]
+          @placeholder[25] = ["","物性化学","",2,1]
+          @placeholder[26] = ["","生命化学Ⅰ","",2,1]
+          @placeholder[27] = ["","生命化学Ⅱ","",2,1]
+        end
+      when "理科三類"
+        if @class == "kiso"
+          n = 27
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール理科","",2,1]
+          @placeholder[11] = ["","基礎物理学実験","",1,1]
+          @placeholder[12] = ["","基礎化学実験","",1,1]
+          @placeholder[13] = ["","基礎生命科学実験","",1,1]
+          @placeholder[14] = ["","生命科学実験","",1,1]
+          @placeholder[15] = ["","数理科学基礎","",2,1]
+          @placeholder[16] = ["","微分積分学","",3,1]
+          @placeholder[17] = ["","線型代数学","",3,1]
+          @placeholder[18] = ["","数理科学基礎演習","",1,1]
+          @placeholder[19] = ["","微分積分学演習","",1,1]
+          @placeholder[20] = ["","線型代数学演習","",1,1]
+          @placeholder[21] = ["","力学","",2,1]
+          @placeholder[22] = ["","電磁気学","",2,1]
+          @placeholder[23] = ["","化学熱力学","",2,1]
+          @placeholder[24] = ["","構造化学","",2,1]
+          @placeholder[25] = ["","物性化学","",2,1]
+          @placeholder[26] = ["","生命化学Ⅰ","",2,1]
+          @placeholder[27] = ["","生命化学Ⅱ","",2,1]
+        end
+      when "文科一類"
+        if @class == "kiso"
+          n = 32
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール文科","",2,1]
+          @placeholder[11] = ["","法Ⅰ","",2,1]
+          @placeholder[12] = ["","法Ⅱ","",2,1]
+          @placeholder[13] = ["","政治Ⅰ","",2,1]
+          @placeholder[14] = ["","政治Ⅱ","",2,1]
+          @placeholder[15] = ["","経済Ⅰ","",2,1]
+          @placeholder[16] = ["","経済Ⅱ","",2,1]
+          @placeholder[17] = ["","社会Ⅰ","",2,1]
+          @placeholder[18] = ["","社会Ⅱ","",2,1]
+          @placeholder[19] = ["","数学Ⅰ","",2,1]
+          @placeholder[20] = ["","数学Ⅱ","",2,1]
+          @placeholder[21] = ["","哲学Ⅰ","",2,1]
+          @placeholder[22] = ["","哲学Ⅱ","",2,1]
+          @placeholder[23] = ["","倫理Ⅰ","",2,1]
+          @placeholder[24] = ["","倫理Ⅱ","",2,1]
+          @placeholder[25] = ["","歴史Ⅰ","",2,1]
+          @placeholder[26] = ["","歴史Ⅱ","",2,1]
+          @placeholder[27] = ["","ことばと文学I","",2,1]
+          @placeholder[28] = ["","ことばと文学Ⅱ","",2,1]
+          @placeholder[29] = ["","ことばと文学Ⅲ","",2,1]
+          @placeholder[30] = ["","ことばと文学Ⅳ","",2,1]
+          @placeholder[31] = ["","心理Ⅰ","",2,1]
+          @placeholder[32] = ["","心理Ⅱ","",2,1]
+        end
+      when "文科二類"
+        if @class == "kiso"
+          n = 32
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール文科","",2,1]
+          @placeholder[11] = ["","法Ⅰ","",2,1]
+          @placeholder[12] = ["","法Ⅱ","",2,1]
+          @placeholder[13] = ["","政治Ⅰ","",2,1]
+          @placeholder[14] = ["","政治Ⅱ","",2,1]
+          @placeholder[15] = ["","経済Ⅰ","",2,1]
+          @placeholder[16] = ["","経済Ⅱ","",2,1]
+          @placeholder[17] = ["","社会Ⅰ","",2,1]
+          @placeholder[18] = ["","社会Ⅱ","",2,1]
+          @placeholder[19] = ["","数学Ⅰ","",2,1]
+          @placeholder[20] = ["","数学Ⅱ","",2,1]
+          @placeholder[21] = ["","哲学Ⅰ","",2,1]
+          @placeholder[22] = ["","哲学Ⅱ","",2,1]
+          @placeholder[23] = ["","倫理Ⅰ","",2,1]
+          @placeholder[24] = ["","倫理Ⅱ","",2,1]
+          @placeholder[25] = ["","歴史Ⅰ","",2,1]
+          @placeholder[26] = ["","歴史Ⅱ","",2,1]
+          @placeholder[27] = ["","ことばと文学I","",2,1]
+          @placeholder[28] = ["","ことばと文学Ⅱ","",2,1]
+          @placeholder[29] = ["","ことばと文学Ⅲ","",2,1]
+          @placeholder[30] = ["","ことばと文学Ⅳ","",2,1]
+          @placeholder[31] = ["","心理Ⅰ","",2,1]
+          @placeholder[32] = ["","心理Ⅱ","",2,1]
+        end
+      when "文科三類"
+        if @class == "kiso"
+          n = 32
+          @placeholder[1] = ["","英語一列①","",1,1]
+          @placeholder[2] = ["","英語一列②","",1,1]
+          @placeholder[3] = ["","ALESS","",2,1]
+          @placeholder[4] = ["","FLOW","",1,1]
+          @placeholder[5] = ["","中国語一列①","",2,1]
+          @placeholder[6] = ["","中国語一列②","",2,1]
+          @placeholder[7] = ["","中国語二列","",2,1]
+          @placeholder[8] = ["","情報","",2,1]
+          @placeholder[9] = ["","スポ身","",2,1]
+          @placeholder[10] = ["","初年度ゼミナール文科","",2,1]
+          @placeholder[11] = ["","法Ⅰ","",2,1]
+          @placeholder[12] = ["","法Ⅱ","",2,1]
+          @placeholder[13] = ["","政治Ⅰ","",2,1]
+          @placeholder[14] = ["","政治Ⅱ","",2,1]
+          @placeholder[15] = ["","経済Ⅰ","",2,1]
+          @placeholder[16] = ["","経済Ⅱ","",2,1]
+          @placeholder[17] = ["","社会Ⅰ","",2,1]
+          @placeholder[18] = ["","社会Ⅱ","",2,1]
+          @placeholder[19] = ["","数学Ⅰ","",2,1]
+          @placeholder[20] = ["","数学Ⅱ","",2,1]
+          @placeholder[21] = ["","哲学Ⅰ","",2,1]
+          @placeholder[22] = ["","哲学Ⅱ","",2,1]
+          @placeholder[23] = ["","倫理Ⅰ","",2,1]
+          @placeholder[24] = ["","倫理Ⅱ","",2,1]
+          @placeholder[25] = ["","歴史Ⅰ","",2,1]
+          @placeholder[26] = ["","歴史Ⅱ","",2,1]
+          @placeholder[27] = ["","ことばと文学I","",2,1]
+          @placeholder[28] = ["","ことばと文学Ⅱ","",2,1]
+          @placeholder[29] = ["","ことばと文学Ⅲ","",2,1]
+          @placeholder[30] = ["","ことばと文学Ⅳ","",2,1]
+          @placeholder[31] = ["","心理Ⅰ","",2,1]
+          @placeholder[32] = ["","心理Ⅱ","",2,1]
+        end
+      end
+      case @class
+      when "sougouL"
+        n = 18
+        @placeholder[1] = ["","外国語初級(ターム)","",1,1]
+        @placeholder[2] = ["","外国語初級(ターム)","",1,1]
+        @placeholder[3] = ["","外国語初級(セメスター)","",2,1]
+        @placeholder[4] = ["","外国語初級(セメスター)","",2,1]
+        @placeholder[5] = ["","外国語中級(ターム)","",1,1]
+        @placeholder[6] = ["","外国語中級(ターム)","",1,1]
+        @placeholder[7] = ["","外国語中級(セメスター)","",2,1]
+        @placeholder[8] = ["","外国語中級(セメスター)","",2,1]
+        @placeholder[9] = ["","外国語上級(ターム)","",1,1]
+        @placeholder[10] = ["","外国語上級(ターム)","",1,1]
+        @placeholder[11] = ["","外国語上級(セメスター)","",2,1]
+        @placeholder[12] = ["","外国語上級(セメスター)","",2,1]
+        @placeholder[13] = ["","古典語初級Ⅰ","",2,1]
+        @placeholder[14] = ["","古典語初級Ⅱ","",2,1]
+        @placeholder[15] = ["","古典語中級Ⅰ","",2,1]
+        @placeholder[16] = ["","古典語中級Ⅱ","",2,1]
+        @placeholder[17] = ["","古典日本語","",2,1]
+        @placeholder[18] = ["","古典中国語","",2,1]
+      when "sougouA"
+        n = 36
+        @placeholder[1] = ["","言語構造論(ターム)","",1,1]
+        @placeholder[2] = ["","言語構造論(セメスター)","",2,1]
+        @placeholder[3] = ["","言語比較論(ターム)","",1,1]
+        @placeholder[4] = ["","言語比較論(セメスター)","",2,1]
+        @placeholder[5] = ["","言語応用論(ターム)","",1,1]
+        @placeholder[6] = ["","言語応用論(セメスター)","",2,1]
+        @placeholder[7] = ["","記号論(ターム)","",1,1]
+        @placeholder[8] = ["","記号論(セメスター)","",2,1]
+        @placeholder[9] = ["","翻訳論(ターム)","",1,1]
+        @placeholder[10] = ["","翻訳論(セメスター)","",2,1]
+        @placeholder[11] = ["","言語態理論(ターム)","",1,1]
+        @placeholder[12] = ["","言語態理論(セメスター)","",2,1]
+        @placeholder[13] = ["","外国文学","",2,1]
+        @placeholder[14] = ["","言語文化論(ターム)","",1,1]
+        @placeholder[15] = ["","言語文化論(セメスター)","",2,1]
+        @placeholder[16] = ["","現代哲学","",2,1]
+        @placeholder[17] = ["","科学哲学","",2,1]
+        @placeholder[18] = ["","現代思想","",2,1]
+        @placeholder[19] = ["","記号論理学I","",2,1]
+        @placeholder[20] = ["","記号論理学Ⅱ","",2,1]
+        @placeholder[21] = ["","精神分析学","",2,1]
+        @placeholder[22] = ["","表象文化論","",2,1]
+        @placeholder[23] = ["","演劇論Ⅰ","",2,1]
+        @placeholder[24] = ["","演劇論Ⅱ","",2,1]
+        @placeholder[25] = ["","美術論","",2,1]
+        @placeholder[26] = ["","映画論","",2,1]
+        @placeholder[27] = ["","音楽論","",2,1]
+        @placeholder[28] = ["","比較文化論","",2,1]
+        @placeholder[29] = ["","比較文学","",2,1]
+        @placeholder[30] = ["","比較思想","",2,1]
+        @placeholder[31] = ["","比較芸術","",2,1]
+        @placeholder[32] = ["","東洋思想史","",2,1]
+        @placeholder[33] = ["","西洋思想史","",2,1]
+        @placeholder[34] = ["","経済思想史","",2,1]
+        @placeholder[35] = ["","社会思想史","",2,1]
+        @placeholder[36] = ["","科学史","",2,1]
+      when "sougouB"
+        n = 30
+        @placeholder[1] = ["","国際関係論","",2,1]
+        @placeholder[2] = ["","国際関係史","",2,1]
+        @placeholder[3] = ["","現代国際社会論","",2,1]
+        @placeholder[4] = ["","平和構築論","",2,1]
+        @placeholder[5] = ["","地域文化論Ⅰ(ターム)","",1,1]
+        @placeholder[6] = ["","地域文化論Ⅰ(セメスター)","",2,1]
+        @placeholder[7] = ["","地域文化論Ⅰ(ターム)","",1,1]
+        @placeholder[8] = ["","地域文化論Ⅱ(セメスター)","",2,1]
+        @placeholder[9] = ["","比較地域史(ターム)","",1,1]
+        @placeholder[10] = ["","比較地域史(セメスター)","",2,1]
+        @placeholder[11] = ["","日本文化論Ⅰ","",2,1]
+        @placeholder[12] = ["","日本文化論Ⅱ","",2,1]
+        @placeholder[13] = ["","日本語日本文学Ⅰ","",1,1]
+        @placeholder[14] = ["","日本語日本文学Ⅱ","",2,1]
+        @placeholder[15] = ["","東洋古典学","",2,1]
+        @placeholder[16] = ["","西洋古典学","",2,1]
+        @placeholder[17] = ["","歴史社会論(ターム)","",1,1]
+        @placeholder[18] = ["","歴史社会論(セメスター)","",2,1]
+        @placeholder[19] = ["","近現代史(ターム)","",1,1]
+        @placeholder[20] = ["","近現代史(セメスター)","",2,1]
+        @placeholder[21] = ["","歴史と文化(ターム)","",1,1]
+        @placeholder[22] = ["","歴史と文化(セメスター)","",2,1]
+        @placeholder[23] = ["","世界史論(ターム)","",1,1]
+        @placeholder[24] = ["","世界史論(セメスター)","",2,1]
+        @placeholder[25] = ["","文化人類学Ⅰ","",2,1]
+        @placeholder[26] = ["","文化人類学Ⅱ","",2,1]
+        @placeholder[27] = ["","民族文化論(ターム)","",1,1]
+        @placeholder[28] = ["","民族文化論(セメスター)","",2,1]
+        @placeholder[29] = ["","現代文化人類学(ターム)","",1,1]
+        @placeholder[30] = ["","現代文化人類学(セメスター)","",2,1]
+      when "sougouC"
+        n = 15
+        @placeholder[1] = ["","法と社会","",2,1]
+        @placeholder[2] = ["","日本国憲法","",2,1]
+        @placeholder[3] = ["","現代社会論","",2,1]
+        @placeholder[4] = ["","比較社会論","",2,1]
+        @placeholder[5] = ["","ジェンダー論","",2,1]
+        @placeholder[6] = ["","日本の政治","",2,1]
+        @placeholder[7] = ["","相関社会科学","",2,1]
+        @placeholder[8] = ["","政治経済学","",2,1]
+        @placeholder[9] = ["","計量社会科学","",2,1]
+        @placeholder[10] = ["","現代経済理論","",2,1]
+        @placeholder[11] = ["","経済政策","",2,1]
+        @placeholder[12] = ["","現代教育論","",2,1]
+        @placeholder[13] = ["","教育臨床心理学","",2,1]
+        @placeholder[14] = ["","教育実践・政策学入門","",2,1]
+        @placeholder[15] = ["","高等教育論入門","",2,1]
+      when "sougouD"
+        n = 59
+        @placeholder[1] = ["","地球環境論","",2,1]
+        @placeholder[2] = ["","環境物質科学","",2,1]
+        @placeholder[3] = ["","生態学","",2,1]
+        @placeholder[4] = ["","社会環境論","",2,1]
+        @placeholder[5] = ["","社会生態学","",2,1]
+        @placeholder[6] = ["","地域生態学","",2,1]
+        @placeholder[7] = ["","人間行動基礎論","",2,1]
+        @placeholder[8] = ["","情報認知科学","",2,1]
+        @placeholder[9] = ["","認知脳科学","",2,1]
+        @placeholder[10] = ["","適応行動論","",2,1]
+        @placeholder[11] = ["","社会行動論","",2,1]
+        @placeholder[12] = ["","スポーツ・身体運動実習","",1,1]
+        @placeholder[13] = ["","スポーツ・身体運動実習Ⅱ","",1,1]
+        @placeholder[14] = ["","身体運動科学","",2,1]
+        @placeholder[15] = ["","健康スポーツ医学","",2,1]
+        @placeholder[16] = ["","身体生命科学","",2,1]
+        @placeholder[17] = ["","身体運動メカニクス","",2,1]
+        @placeholder[18] = ["","情報メディア基礎論","",2,1]
+        @placeholder[19] = ["","情報メディア伝達論","",2,1]
+        @placeholder[20] = ["","情報メディア表現論","",2,1]
+        @placeholder[21] = ["","科学技術基礎論Ⅰ(ターム)","",1,1]
+        @placeholder[22] = ["","科学技術基礎論Ⅰ(セメスター)","",2,1]
+        @placeholder[23] = ["","科学技術基礎論Ⅱ(ターム)","",1,1]
+        @placeholder[24] = ["","科学技術基礎論Ⅱ(セメスター)","",2,1]
+        @placeholder[25] = ["","現代倫理(ターム)","",1,1]
+        @placeholder[26] = ["","現代倫理(セメスター)","",2,1]
+        @placeholder[27] = ["","科学技術社会論","",2,1]
+        @placeholder[28] = ["","システム論","",2,1]
+        @placeholder[29] = ["","現代工学概論","",2,1]
+        @placeholder[30] = ["","現代工学基礎Ⅰ(ターム)","",1,1]
+        @placeholder[31] = ["","現代工学基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[32] = ["","現代工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[33] = ["","現代工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[34] = ["","社会システム工学基礎Ⅰ(ターム)","",1,1]
+        @placeholder[35] = ["","社会システム工学基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[36] = ["","社会システム工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[37] = ["","社会システム工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[38] = ["","総合工学基礎Ⅰ(ターム)","",1,1]
+        @placeholder[39] = ["","総合工学基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[40] = ["","総合工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[41] = ["","総合工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[42] = ["","生体医工学基礎Ⅰ(ターム)","",1,1]
+        @placeholder[43] = ["","生体医工学基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[44] = ["","生体医工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[45] = ["","生体医工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[46] = ["","環境・エネルギー工学概論","",2,1]
+        @placeholder[47] = ["","環境・エネルギー工学基礎Ⅰ(ターム)","",1,1]
+        @placeholder[48] = ["","環境・エネルギー工学基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[49] = ["","環境・エネルギー工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[50] = ["","環境・エネルギー工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[51] = ["","ヘルス・サイエンス概論","",2,1]
+        @placeholder[52] = ["","看護学概論Ⅰ","",2,1]
+        @placeholder[53] = ["","看護学概論Ⅱ","",2,1]
+        @placeholder[54] = ["","環境と生物資源(ターム)","",1,1]
+        @placeholder[55] = ["","環境と生物資源(セメスター)","",2,1]
+        @placeholder[56] = ["","食糧と環境(ターム)","",1,1]
+        @placeholder[57] = ["","食糧と環境(セメスター)","",2,1]
+        @placeholder[58] = ["","森林環境資源学","",2,1]
+        @placeholder[59] = ["","水と土の環境科学","",2,1]
+        @placeholder[60] = ["","放射線環境科学","",2,1]
+        @placeholder[61] = ["","住環境の科学","",1,1]
+        @placeholder[62] = ["","教育心理学の世界","",2,1]
+        @placeholder[63] = ["","心身の実践科学","",2,1]
+        @placeholder[64] = ["","臨床心理学概論","",2,1]
+      when "sougouE"
+        n = 56
+        @placeholder[1] = ["","振動・波動論","",2,1]
+        @placeholder[2] = ["","解析力学","",2,1]
+        @placeholder[3] = ["","相対論","",2,1]
+        @placeholder[4] = ["","量子論","",2,1]
+        @placeholder[5] = ["","統計物理学","",2,1]
+        @placeholder[6] = ["","現代物理学","",2,1]
+        @placeholder[7] = ["","物理科学Ⅰ","",2,1]
+        @placeholder[8] = ["","物理科学Ⅱ","",2,1]
+        @placeholder[9] = ["","有機反応化学","",2,1]
+        @placeholder[10] = ["","化学平衡と反応速度","",2,1]
+        @placeholder[11] = ["","超分子化学","",2,1]
+        @placeholder[12] = ["","物質化学","",2,1]
+        @placeholder[13] = ["","分子システムの化学","",2,1]
+        @placeholder[14] = ["","基礎方程式とその意味","",2,1]
+        @placeholder[15] = ["","分子化学概論","",2,1]
+        @placeholder[16] = ["","化学薬学概論","",1,1]
+        @placeholder[17] = ["","物質・生命工学概論","",2,1]
+        @placeholder[18] = ["","物質・生命工学基礎ⅠA(ターム)","",1,1]
+        @placeholder[19] = ["","物質・生命工学基礎ⅠA(セメスター)","",2,1]
+        @placeholder[20] = ["","物質・生命工学基礎ⅠB(ターム)","",1,1]
+        @placeholder[21] = ["","物質・生命工学基礎ⅠB(セメスター)","",2,1]
+        @placeholder[22] = ["","物質・生命工学基礎Ⅱ(ターム)","",1,1]
+        @placeholder[23] = ["","物質・生命工学基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[24] = ["","動物科学","",1,1]
+        @placeholder[25] = ["","植物科学","",1,1]
+        @placeholder[26] = ["","進化学","",2,1]
+        @placeholder[27] = ["","現代生命科学Ⅰ","",1,1]
+        @placeholder[28] = ["","現代生命科学Ⅱ","",1,1]
+        @placeholder[29] = ["","分子生命科学","",2,1]
+        @placeholder[30] = ["","現代生物学","",2,1]
+        @placeholder[31] = ["","人類科学","",2,1]
+        @placeholder[32] = ["","生物情報科学","",2,1]
+        @placeholder[33] = ["","生物薬学概論","",1,1]
+        @placeholder[34] = ["","惑星地球科学Ⅰ","",2,1]
+        @placeholder[35] = ["","惑星地球科学Ⅱ","",2,1]
+        @placeholder[36] = ["","地球惑星物理学入門","",2,1]
+        @placeholder[37] = ["","地球惑星環境学入門","",2,1]
+        @placeholder[38] = ["","惑星地球科学実習","",2,1]
+        @placeholder[39] = ["","宇宙科学Ⅰ","",2,1]
+        @placeholder[40] = ["","宇宙科学Ⅱ","",2,1]
+        @placeholder[41] = ["","宇宙科学実習Ⅰ","",2,1]
+        @placeholder[42] = ["","宇宙科学実習Ⅱ","",2,1]
+        @placeholder[43] = ["","惑星地球科学Ⅰ","",2,1]
+        @placeholder[44] = ["","惑星地球科学Ⅱ","",2,1]
+        @placeholder[45] = ["","宇宙科学Ⅰ","",2,1]
+        @placeholder[46] = ["","微生物の科学","",2,1]
+        @placeholder[47] = ["","アグリバイオロジー","",1,1]
+        @placeholder[48] = ["","植物医科学","",2,1]
+        @placeholder[49] = ["","応用動物科学Ⅰ","",2,1]
+        @placeholder[50] = ["","応用動物科学Ⅱ","",2,1]
+        @placeholder[51] = ["","食の科学","",1,1]
+        @placeholder[52] = ["","海の生命科学","",2,1]
+        @placeholder[53] = ["","天然物の科学","",1,1]
+        @placeholder[54] = ["","生物素材の科学","",1,1]
+        @placeholder[55] = ["","森の生物学","",2,1]
+        @placeholder[56] = ["","自然現象とモデル","",2,1]
+        @placeholder[57] = ["","生物物理学","",2,1]
+      when "sougouF"
+        n = 30
+        @placeholder[1] = ["","微分積分学続論","",2,1]
+        @placeholder[2] = ["","常微分方程式","",2,1]
+        @placeholder[3] = ["","ベクトル解析","",2,1]
+        @placeholder[4] = ["","解析学基礎","",2,1]
+        @placeholder[5] = ["","数理科学概論Ⅰ","",2,1]
+        @placeholder[6] = ["","数理科学概論Ⅱ","",2,1]
+        @placeholder[7] = ["","数理科学概論Ⅲ","",2,1]
+        @placeholder[8] = ["","数理工学入門(ターム)","",1,1]
+        @placeholder[9] = ["","数理工学入門(セメスター)","",2,1]
+        @placeholder[10] = ["","統計データ解析Ⅰ","",2,1]
+        @placeholder[11] = ["","統計データ解析Ⅱ","",2,1]
+        @placeholder[12] = ["","図形科学A","",2,1]
+        @placeholder[13] = ["","図形科学B","",2,1]
+        @placeholder[14] = ["","図形科学演習Ⅰ","",2,1]
+        @placeholder[15] = ["","図形科学演習Ⅱ","",2,1]
+        @placeholder[16] = ["","基礎統計","",2,1]
+        @placeholder[17] = ["","統計分析","",2,1]
+        @placeholder[18] = ["","アルゴリズム入門","",2,1]
+        @placeholder[19] = ["","計算機プログラミング","",2,1]
+        @placeholder[20] = ["","計算機システム概論","",2,1]
+        @placeholder[21] = ["","計算の理論","",2,1]
+        @placeholder[22] = ["","情報・システム工学概論","",1,1]
+        @placeholder[23] = ["","情報システム基礎Ⅰ(ターム)","",1,1]
+        @placeholder[24] = ["","情報システム基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[25] = ["","情報システム基礎Ⅱ(ターム)","",1,1]
+        @placeholder[26] = ["","情報システム基礎Ⅱ(セメスター)","",2,1]
+        @placeholder[27] = ["","モデリングとシミュレーション基礎Ⅰ(ターム)","",1,1]
+        @placeholder[28] = ["","モデリングとシミュレーション基礎Ⅰ(セメスター)","",2,1]
+        @placeholder[29] = ["","モデリングとシミュレーション基礎Ⅱ(ターム)","",1,1]
+        @placeholder[30] = ["","モデリングとシミュレーション基礎Ⅱ(セメスター)","",2,1]
+      end %>
+      <% unless @score_list %>
+        <% @score_list = Array.new(n+1, Array.new(5,"")) %>
+      <% end %>
+      <% for i in 1..n %>
+        <% save_i = "save" + i.to_s
+        class_name_i = "class_name" + i.to_s
+        score_i = "score" + i.to_s
+        credit_i = "credit" + i.to_s
+        weight_i = "weight" + i.to_s %>
+        <tr>
+          <td>
+            <input type="checkbox" id="<%= i %>" name="<%= save_i %>" value="checked" <% if @score_list[i][0]=="checked" %>checked<% end %>>
+          </td>
+          <td>
+            <input type="hidden" name="<%= class_name_i %>" value="<%= @placeholder[i][1] %>">
+            <label for="<%= i %>"><%= @placeholder[i][1] %></label>
+          </td>
+          <td>
+            <input name="<%= score_i %>" value="<%= @score_list[i][2] %>">
+          </td>
+          <td>
+            <input type="hidden" name="<%= credit_i %>" value="<%= @placeholder[i][3] %>">
+          </td>
+          <td>
+            <input type="hidden" name="<%= weight_i %>" value="<%= @placeholder[i][4] %>">
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+    <input type="submit" value="保存">
+    <% end %>
   <% end %>
 </body>
 

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   get 'inquiry/index'
 
+  post 'user/department' => 'user#department'
+  get 'user/department' => 'input#department'
+
   get 'user/new' => 'user#new'
   post 'user/create' => 'user#create'
   get 'user/create' => 'user#create'
@@ -11,10 +14,11 @@ Rails.application.routes.draw do
   post 'logout' => 'user#logout'
 
   get '' => 'home#top'
+  get 'input/department' => 'home#department'
   get 'input/:class' => 'home#input'
+  get 'add/:class_add' => 'home#input'
   get 'result' => 'home#result'
 
-  get 'add/:class' => 'user#add'
   get 'user/:id/edit' => 'user#edit'
 
   post 'score/destroy_all' => 'score#destroy_all'

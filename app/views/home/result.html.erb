@@ -15,11 +15,11 @@
     @credit = @scores.all.map{|score| score.credit}
     @w_c = @weight.zip(@credit).map{|w,c|w*c}
     @s_w_c = @score.zip(@w_c).map{|s,w_c|s*w_c}
-    @result = @s_w_c.sum/@w_c.sum.round(2) %>
+    @result = @s_w_c.sum/@w_c.sum %>
     <p>あなたの基本平均点はこちらです。</p>
-    <%= @result %>点
+    <%= @result.round(2) %>点
     <p>結果を共有する</p>
-    <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://ut-shinhurii.herokuapp.com" data-text="進振りサービスUT_Shinhuriiを使ったよ！私の進振り点は<%= @result %>点でした！" data-hashtags="UT_Shinhurii">Tweet</a>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://ut-shinhurii.herokuapp.com" data-text="進振りサービスUT_Shinhuriiを使ったよ！私の進振り点は<%= @result.round(2) %>点でした！" data-hashtags="UT_Shinhurii">Tweet</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     <br>
     <div class="fb-share-button" data-href="https://ut-shinhurii.herokuapp.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fut-shinhurii.herokuapp.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">シェア</a></div>
