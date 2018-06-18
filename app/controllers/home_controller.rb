@@ -1,23 +1,36 @@
 class HomeController < ApplicationController
 
-before_action :authenticate_user, {only: [:input, :result]}
+before_action :authenticate_user, {only: [:input, :result, :department]}
 
   def top
     render :layout => 'top_layout'
   end
   def input
-    if params[:class]
+    if params[:class].present?
       @class = params[:class]
     else
+      @class_add = params[:class_add]
     end
-    case @class
-    when "基礎科目","総合科目L","総合科目ABC","総合科目DEF","総合科目ABCD","総合科目EF" then
-      @score = Score.new
-      render :layout => 'input_layout'
+    if @class.present?
+      case @class
+      when "基礎科目","総合科目L","総合科目A","総合科目B","総合科目C","総合科目D","総合科目E","総合科目F" then
+        @score = Score.new
+        render :layout => 'input_layout'
+      else
+        flash[:notice] = "無効なURLです"
+        redirect_to("/")
+      end
     else
-      flash[:notice] = "無効なURLです"
-      redirect_to("/")
+      case @class_add
+      when "基礎科目","総合科目L","総合科目A","総合科目B","総合科目C","総合科目D","総合科目E","総合科目F" then
+        @score = Score.new
+      else
+        flash[:notice] = "無効なURLです"
+        redirect_to("/")
+      end
     end
+  end
+  def department
   end
   def result
   end

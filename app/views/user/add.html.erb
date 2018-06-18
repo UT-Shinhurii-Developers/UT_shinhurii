@@ -1,3 +1,5 @@
+<!--多分使わない-->
+
 <html>
 
   <head>
@@ -13,14 +15,18 @@
       @class = "kiso"
     when "総合科目L"
       @class = "sougouL"
-    when "総合科目ABC"
-      @class = "sougouABC"
-    when "総合科目DEF"
-      @class = "sougouDEF"
-    when "総合科目ABCD"
-      @class = "sougouABCD"
-    when "総合科目EF"
-      @class = "sougouEF"
+    when "総合科目A"
+      @class = "sougouA"
+    when "総合科目B"
+      @class = "sougouB"
+    when "総合科目C"
+      @class = "sougouC"
+    when "総合科目D"
+      @class = "sougouD"
+    when "総合科目E"
+      @class = "sougouE"
+    when "総合科目F"
+      @class = "sougouF"
     end %>
     <%= form_tag("/score/#{@class}/mypage") do %>
       <table>
@@ -29,8 +35,6 @@
           <th>登録</th>
           <th>授業名</th>
           <th>点数</th>
-          <th>単位数</th>
-          <th>重率</th>
         </tr>
       </thead>
       <tbody>
@@ -49,16 +53,17 @@
               <input type="checkbox" name="<%= save_i %>" value="checked" <% if @score_list[i][0]=="checked" %>checked<% end %>>
             </td>
             <td>
-              <input name="<%= class_name_i %>" value="<%= @score_list[i][1] %>">
+              <input type="hidden" name="<%= class_name_i %>" value="<%= @score_list[i][1] %>">
+              <%= @score_list[i][1] %>
             </td>
             <td>
               <input name="<%= score_i %>" value="<%= @score_list[i][2] %>">
             </td>
             <td>
-              <input name="<%= credit_i %>" value="<%= @score_list[i][3] %>">
+              <input type="hidden" name="<%= credit_i %>">
             </td>
             <td>
-              <input name="<%= weight_i %>" value="<%= @score_list[i][4] %>">
+              <input type="hidden" name="<%= weight_i %>">
             </td>
           </tr>
         <% end %>

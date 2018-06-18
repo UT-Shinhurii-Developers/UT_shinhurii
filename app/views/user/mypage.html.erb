@@ -17,58 +17,10 @@
     <p>成績データがありません</p>
   <% end %>
   <ul>
-    <% case @current_user.karui %>
-    <% when "理科一類", "理科二類", "理科三類" %>
-      <% for i in 0..3 do %>
-      <% @class_types = ["基礎科目","総合科目L","総合科目ABCD","総合科目EF"] %>
-      <% @class_type = @class_types[i] %>
-      <li><%= @class_type %> <%= link_to("追加", "/add/#{@class_type}") %></li>
-        <% @scores = Score.where(["user_name=? and class_type=?", @current_user.name, @class_type]) %>
-        <% if @scores.any? %>
-          <table border="1">
-          <thead>
-            <tr>
-              <th>授業名</th>
-              <th>点数</th>
-              <th>単位数</th>
-              <th>重率</th>
-            </tr>
-          </thead>
-          <% @scores.each do |score| %>
-          <tbody>
-            <tr>
-              <td>
-                <%= score.class_name %>
-              </td>
-              <td>
-                <%= score.score %>
-              </td>
-              <td>
-                <%= score.credit %>
-              </td>
-              <td>
-                <%= score.weight %>
-              </td>
-              <td>
-                <%= link_to("編集", "/user/#{score.id}/edit") %>
-              </td>
-              <td>
-                <%= link_to("削除", "/score/#{score.id}/destroy", method: :post, data:{confirm:'削除してよろしいですか？'}) %>
-              </td>
-            </tr>
-          </tbody>
-          <% end %>
-          </table>
-        <% else %>
-          <p>成績が入力されていません</p>
-        <% end %>
-        <br>
-      <% end %>
-    <% else %>
-    <% for i in 0..3 do %>
-    <% @class_types = ["基礎科目","総合科目L","総合科目ABC","総合科目DEF"] %>
+    <% for i in 0..7 do %>
+    <% @class_types = ["基礎科目","総合科目L","総合科目A","総合科目B","総合科目C","総合科目D","総合科目E","総合科目F"] %>
     <% @class_type = @class_types[i] %>
-    <li><%= @class_type %> <%= link_to("追加", "/add/#{@class_type}") %></li>
+    <li><%= @class_type %><%= link_to("追加", "/add/#{@class_type}") %></li>
       <% @scores = Score.where(["user_name=? and class_type=?", @current_user.name, @class_type]) %>
       <% if @scores.any? %>
         <table border="1">
@@ -77,12 +29,11 @@
             <th>授業名</th>
             <th>点数</th>
             <th>単位数</th>
-            <th>重率</th>
           </tr>
         </thead>
         <% @scores.each do |score| %>
         <tbody>
-          <tr>
+          <tr align="center">
             <td>
               <%= score.class_name %>
             </td>
@@ -91,10 +42,6 @@
             </td>
             <td>
               <%= score.credit %>
-            </td>
-            <td>
-              <%= score.weight %>
-            </td>
             <td>
               <%= link_to("編集", "/user/#{score.id}/edit") %>
             </td>
@@ -109,7 +56,6 @@
         <p>成績が入力されていません</p>
       <% end %>
       <br>
-    <% end %>
     <% end %>
     <li>基本平均点</li>
     <%
