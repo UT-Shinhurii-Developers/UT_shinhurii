@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'inquiry/index'
 
   post 'user/department' => 'user#department'
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   get 'login' => 'user#login'
   post 'logout' => 'user#logout'
 
-  get '' => 'home#top'
+  get '/' => 'home#index'
   get 'input/department' => 'home#department'
   get 'input/:class' => 'home#input'
   get 'add/:class_add' => 'home#input'
