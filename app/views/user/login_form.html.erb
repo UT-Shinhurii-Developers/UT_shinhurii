@@ -7,7 +7,9 @@
 
 <body>
  <div class="container-us">
-  <h5>ログイン</h5>
+ <div class="card-pannel">
+  <h5 class="h5-us">ログイン</h5>
+  <div calss="card-contents">
   <% if @error_message.present? %>
     <strong><%= @error_message %></strong>
   <% end %>
@@ -20,6 +22,8 @@
   <% end %>
   <p>または<%= link_to("新規登録", "/user/new") %></p>
 	</div>
+	</div>
+    </div>
 </body>
 
 </html>

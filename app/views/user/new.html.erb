@@ -5,7 +5,7 @@
   <meta charset="utf-8">
 	<script>
 		$(document).ready(function() {
-			$('select').material_select();
+			$('select').formSelect();
 		});
 	</script>
 </head>
@@ -14,7 +14,7 @@
  <div class="container-us">
   
   <div class="card-panel">
-  <h5>新規登録</h5>
+  <h5 class="h5-us">新規登録</h5>
   <div calss="card-contents">
   <% if @user.errors.any? %>
     <strong>入力内容にエラーがあります</strong>
@@ -43,7 +43,7 @@
         </div>
 	  </div>
        <div class="row center">
-        <div class="btn waves-effect waves-light">
+        <div class="btn waves-effect waves-light pink accent-3">
         <%= f.submit %>
         <i class="material-icons right">send</i>
         </div>

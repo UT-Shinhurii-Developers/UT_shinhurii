@@ -68,7 +68,7 @@ gem 'rails-i18n'
 gem 'social-share-button'
 
 #Materializedを追加するgem
-gem 'materialize-sass'
+gem 'materialize-sass', '~> 1.0.0.rc1'
 
 #Material Iconsを追加するgem
 gem 'material_icons' 

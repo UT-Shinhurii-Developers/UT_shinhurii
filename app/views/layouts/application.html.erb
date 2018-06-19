@@ -1,26 +1,74 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ShinhuriiApp</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+        $(document).ready(function() {
+            $('.sidenav').sidenav();
+        });
+    </script>
   </head>
 
   <body>
-    <% if session[:user_id] %>
-      <%= link_to("トップへ", "/") %>
-      <%= link_to("ログアウト", "/logout", {method: "post"}) %>
-      <%= link_to("#{@current_user.name}のマイページ", "/user/#{@current_user.name}") %>
-    <% else %>
-      <%= link_to("トップへ", "/") %>
-    <% end %>
+   
+   <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper indigo darken-2">
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                   <% if session[:user_id] %>
+                    <li class="waves-effect waves-light"><%= link_to("トップ", "/") %></li>
+                    <li class="waves-effect waves-light"><%= link_to("#{@current_user.name}のマイページ", "/user/#{@current_user.name}") %></li>
+                    <li class="waves-effect waves-light"><%= link_to("ログアウト", "/logout", {method: "post"}) %></li>
+                    <% else %>
+                    <li class="waves-effect waves-light"><%= link_to("トップ", "/") %></li>
+                    <% end %>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <ul class="sidenav" id="mobile-demo">
+       <% if session[:user_id] %>
+        <li><%= link_to("トップ", "/") %></li>
+        <li><%= link_to("#{@current_user.name}のマイページ", "/user/#{@current_user.name}") %></li>
+        <li><%= link_to("ログアウト", "/logout", {method: "post"}) %></li>
+        <% else %>
+        <li><%= link_to("トップ", "/") %></li>
+        <% end %>
+    </ul>
+    
     <% if flash[:notice] %>
       <%= flash[:notice] %>
     <% end %>
+    
     <%= yield %>
-    <h3>KALS Project</h3>
-    <p><small>created by やはりT大の進振りシステムはまちがっている。</small></p>
+    
+    <footer class="page-footer indigo darken-2">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+<!--                    <li><a class="grey-text text-lighten-3" href="#!">このサイトについて</a></li>-->
+<!--                    <li><a class="grey-text text-lighten-3" href="#!">プライバシーポリシー</a></li>-->
+<!--                    <li><a class="grey-text text-lighten-3" href="#!">利用規約</a></li>-->
+                    <li><a class="grey-text text-lighten-3" href="#!">お問い合わせ</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2014 Copyright　
+<!--            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>-->
+            </div>
+          </div>
+    </footer>
   </body>
 </html>
