@@ -16,7 +16,7 @@
    <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper indigo darken-2">
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <a href="" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                    <% if session[:user_id] %>
                     <li class="waves-effect waves-light"><%= link_to("トップ", "/") %></li>
@@ -40,7 +40,12 @@
     </ul>
     
     <% if flash[:notice] %>
-      <%= flash[:notice] %>
+     <script>
+         M.toast({
+             html: '<%= flash[:notice] %>',
+             displayLength: 2500,
+         })
+      </script>
     <% end %>
     
     <%= yield %>

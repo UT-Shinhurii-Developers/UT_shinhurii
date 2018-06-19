@@ -12,10 +12,10 @@
 
 <body>
  <div class="container-us">
-  
   <div class="card-panel">
   <h5 class="h5-us">新規登録</h5>
   <div calss="card-contents">
+  
   <% if @user.errors.any? %>
     <strong>入力内容にエラーがあります</strong>
     <ul>
@@ -24,6 +24,7 @@
       <% end %>
     </ul>
   <% end %>
+  
   <%= form_for (@user), :url => {:action => :create} do |f| %>
         <div class="row">
         <div id="user_id" class="input-field col s12 validate">
@@ -49,6 +50,7 @@
         </div>
 	 </div>
   <% end %>
+  
 	  </div>
 	 </div>
   </div>

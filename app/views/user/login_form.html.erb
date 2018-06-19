@@ -10,16 +10,31 @@
  <div class="card-pannel">
   <h5 class="h5-us">ログイン</h5>
   <div calss="card-contents">
+  
   <% if @error_message.present? %>
     <strong><%= @error_message %></strong>
   <% end %>
+  
   <%= form_tag("/login") do %>
-    <p>ユーザ名</p>
-    <input name="name">
-    <p>パスワード</p>
-    <input type="password" name="password">
-    <input type="submit" value="ログイン">
+   <div class="row">
+        <div id="user_id" class="input-field col s12 validate">
+        	<label for="user_id">User ID</label>
+        	<input name="name" type="text" autocomplete="off">
+        </div>
+	  </div>
+	  <div class="row">
+    	<div id="password" class="input-field col s12 validate">
+        	<label for="password">パスワード</label>
+        	<input type="password" name="password" autocomplete="off">
+        </div>
+	  </div>
+	  <div class="row center">
+        <div class="btn waves-effect waves-light pink accent-3">
+        <input type="submit" value="ログイン">
+        </div>
+	 </div>
   <% end %>
+  
   <p>または<%= link_to("新規登録", "/user/new") %></p>
 	</div>
 	</div>
