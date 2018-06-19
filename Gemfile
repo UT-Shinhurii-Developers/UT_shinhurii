@@ -75,3 +75,6 @@ gem 'material_icons'
 
 #jQueryを追加するgem
 gem "jquery-rails"
+
+#wdmを追加すうgem
+gem 'wdm'
