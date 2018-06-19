@@ -73,7 +73,15 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
     @score = Score.find_by(id:params[:id])
   end
   def department
-    #保存処理
+    @deps = ["","",""]
+    @deps[0] = params[:check][0]
+    if params[:check][1].present?
+      @deps[1] = params[:check][1]
+    end
+    if params[:check][2].present?
+      @deps[2] = params[:check][2]
+    end
+    User.update_all(:dep1 => @deps[0], :dep2 => @deps[1], :dep3 => @deps[2])
     redirect_to("/result")
   end
 end

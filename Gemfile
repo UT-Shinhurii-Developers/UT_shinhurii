@@ -67,6 +67,9 @@ gem 'rails-i18n'
 #SNSボタンを追加するgem
 gem 'social-share-button'
 
+#メールアドレス認証を可能にするgem
+gem 'devise'
+
 #Materializedを追加するgem
 gem 'materialize-sass', '~> 1.0.0.rc1'
 
@@ -76,5 +79,5 @@ gem 'material_icons'
 #jQueryを追加するgem
 gem "jquery-rails"
 
-#wdmを追加すうgem
+#wdmを追加するgem
 gem 'wdm'

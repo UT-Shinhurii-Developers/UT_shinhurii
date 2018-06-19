@@ -10,7 +10,7 @@
 
   <body>
     <%= link_to("トップへ", "/") %>
-    <%= link_to("ログアウト", "/logout", {method: "post"}) %>
+    <%= link_to("ログアウト", "/users/sign_out", {method: "delete"}) %>
     <% if flash[:notice] %>
       <%= flash[:notice] %>
     <% end %>

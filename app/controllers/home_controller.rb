@@ -2,8 +2,8 @@ class HomeController < ApplicationController
 
 before_action :authenticate_user, {only: [:input, :result, :department]}
 
-  def top
-    render :layout => 'top_layout'
+  def index
+    render :layout => 'index_layout'
   end
   def input
     if params[:class].present?
