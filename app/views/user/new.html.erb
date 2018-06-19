@@ -1,12 +1,21 @@
 <html>
 
 <head>
-  <title>ユーザー新規登録</title>
+ <title>ユーザー新規登録</title>
   <meta charset="utf-8">
+	<script>
+		$(document).ready(function() {
+			$('select').formSelect();
+		});
+	</script>
 </head>
 
 <body>
-  <h1>新規登録</h1>
+ <div class="container-us">
+  
+  <div class="card-panel">
+  <h5 class="h5-us">新規登録</h5>
+  <div calss="card-contents">
   <% if @user.errors.any? %>
     <strong>入力内容にエラーがあります</strong>
     <ul>
@@ -16,20 +25,33 @@
     </ul>
   <% end %>
   <%= form_for (@user), :url => {:action => :create} do |f| %>
-    <p>東京大学指定のメールアドレス</p>
-    <%= f.text_field :email, value: @user.email %>@g.ecc.u-tokyo.ac.jp
-    <p>ユーザ名(公開されません)</p>
-    <%= f.text_field :name, value: @user.name %>
-    <p>科類</p>
-    <%= f.select :karui, [["理科一類", "理科一類"],["理科二類", "理科二類"],["理科三類", "理科三類"],["文科一類","文科一類"],["文科二類","文科二類"],["文科三類","文科三類"]], :prompt => "選択してください" %>
-    <p>パスワード（6文字以上）</p>
-    <%= f.password_field :password %>
-    <p>パスワード（確認用）</p>
-    <%= f.password_field :password %>
-    <br>
-    <%= f.submit %>
+        <div class="row">
+        <div id="user_id" class="input-field col s12 validate">
+        	<label for="user_id">User ID</label>
+        	<%= f.text_field :name, :autocomplete => :off, value: @user.name %>
+        </div>
+	  </div>
+   	<div class="row">
+    	<div id="password" class="input-field col s12 validate">
+        	<label for="password">パスワード(6文字以上)</label>
+        	<%= f.password_field :password, :autocomplete => :off %>
+        </div>
+	  </div>
+       <div class="row">
+        <div class="input-field col s12">
+        	<%= f.select :karui, [["文科一類","文科一類"],["文科二類","文科二類"],["文科三類","文科三類"],["理科一類", "理科一類"],["理科二類", "理科二類"],["理科三類", "理科三類"],], :prompt => "科類を選択してください" %>
+        </div>
+	  </div>
+       <div class="row center">
+        <div class="btn waves-effect waves-light pink accent-3">
+        <%= f.submit %>
+        <i class="material-icons right">send</i>
+        </div>
+	 </div>
   <% end %>
-
+	  </div>
+	 </div>
+  </div>
 </body>
 
 </html>
