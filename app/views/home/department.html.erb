@@ -3,192 +3,205 @@
   <head>
     <title>学科選択</title>
     <meta charset="utf-8">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   </head>
-
   <body>
     <h1>学科選択</h1>
-    <p>志望する学科をすべて選択してください</p>
+    <p>志望する学科を3つまで選択してください</p>
     <%= form_tag("/user/department") do %>
     <ul>
     <li>法学部</li>
-      <label><input type="checkbox" name="法学部[]" value="第１類">第１類</label>
+      <label><input type="checkbox" name="check[]" value="法学部・第１類">第１類</label>
       <br>
-      <label><input type="checkbox" name="法学部[]" value="第２類">第２類</label>
+      <label><input type="checkbox" name="check[]" value="法学部・第２類">第２類</label>
       <br>
-      <label><input type="checkbox" name="法学部[]" value="第３類">第３類</label>
+      <label><input type="checkbox" name="check[]" value="法学部・第３類">第３類</label>
       <br><br>
     <li>経済学部</li>
-      <label><input type="checkbox" name="経済学部[]" value="経済学科">経済学科</label>
+      <label><input type="checkbox" name="check[]" value="経済学部・経済学科">経済学科</label>
       <br>
-      <label><input type="checkbox" name="経済学部[]" value="経営学科">経営学科</label>
+      <label><input type="checkbox" name="check[]" value="経済学部・経営学科">経営学科</label>
       <br>
-      <label><input type="checkbox" name="経済学部[]" value="金融学科">金融学科</label>
+      <label><input type="checkbox" name="check[]" value="経済学部・金融学科">金融学科</label>
       <br><br>
     <li>文学部</li>
-      <label><input type="checkbox" name="文学部[]" value="人文学科学科<思想文化>">人文学科学科<思想文化></label>
+      <label><input type="checkbox" name="check[]" value="文学部・人文学科学科<思想文化>">人文学科学科<思想文化></label>
       <br>
-      <label><input type="checkbox" name="文学部[]" value="人文学科<歴史文化/日本史学>">人文学科<歴史文化/日本史学></label>
+      <label><input type="checkbox" name="check[]" value="文学部・人文学科<歴史文化/日本史学>">人文学科<歴史文化/日本史学></label>
       <br>
-      <label><input type="checkbox" name="文学部[]" value="人文学科<歴史文化/東洋史学><">人文学科<歴史文化/東洋史学></label>
+      <label><input type="checkbox" name="check[]" value="文学部・人文学科<歴史文化/東洋史学><">人文学科<歴史文化/東洋史学></label>
       <br>
-      <label><input type="checkbox" name="文学部[]" value="人文学科<歴史文化/西洋史学>">人文学科<歴史文化/西洋史学></label>
+      <label><input type="checkbox" name="check[]" value="文学部・人文学科<歴史文化/西洋史学>">人文学科<歴史文化/西洋史学></label>
       <br>
-      <label><input type="checkbox" name="文学部[]" value="人文学科<歴史文化/考古学>">人文学科<歴史文化/考古学></label>
+      <label><input type="checkbox" name="check[]" value="文学部・人文学科<歴史文化/考古学>">人文学科<歴史文化/考古学></label>
       <br>
-      <label><input type="checkbox" name="文学部[]" value="人文学科<歴史文化/美術史学>">人文学科<歴史文化/美術史学></label>
+      <label><input type="checkbox" name="check[]" value="文学部・人文学科<歴史文化/美術史学>">人文学科<歴史文化/美術史学></label>
       <br>
-      <label><input type="checkbox" name="文学部[]" value="人文学科<言語文化>">人文学科<言語文化></label>
+      <label><input type="checkbox" name="check[]" value="文学部・人文学科<言語文化>">人文学科<言語文化></label>
       <br>
-      <label><input type="checkbox" name="文学部[]" value="人文学科<心理学>">人文学科<心理学></label>
+      <label><input type="checkbox" name="check[]" value="文学部・人文学科<心理学>">人文学科<心理学></label>
       <br>
-      <label><input type="checkbox" name="文学部[]" value="人文学科<社会心理学>">人文学科<社会心理学></label>
+      <label><input type="checkbox" name="check[]" value="文学部・人文学科<社会心理学>">人文学科<社会心理学></label>
       <br>
-      <label><input type="checkbox" name="文学部[]" value="人文学科<社会学>">人文学科<社会学></label>
+      <label><input type="checkbox" name="check[]" value="文学部・人文学科<社会学>">人文学科<社会学></label>
       <br><br>
     <li>教育学部</li>
-      <label><input type="checkbox" name="教育学部[]" value="総合教育科学<基礎教育学/基礎教育学>">総合教育科学<基礎教育学/基礎教育学></label>
+      <label><input type="checkbox" name="check[]" value="教育学部・総合教育科学<基礎教育学/基礎教育学>">総合教育科学<基礎教育学/基礎教育学></label>
       <br>
-      <label><input type="checkbox" name="教育学部[]" value="総合教育科学<教育社会科学/比較教育社会学>">総合教育科学<教育社会科学/比較教育社会学></label>
+      <label><input type="checkbox" name="check[]" value="教育学部・総合教育科学<教育社会科学/比較教育社会学>">総合教育科学<教育社会科学/比較教育社会学></label>
       <br>
-      <label><input type="checkbox" name="教育学部[]" value="総合教育科学<教育社会科学/教育実践・政策学>">総合教育科学<教育社会科学/教育実践・政策学></label>
+      <label><input type="checkbox" name="check[]" value="教育学部・総合教育科学<教育社会科学/教育実践・政策学>">総合教育科学<教育社会科学/教育実践・政策学></label>
       <br>
-      <label><input type="checkbox" name="教育学部[]" value="心身発達科学<教育社会科学/教育実践・政策学>">総合教育科学<教育社会科学/教育実践・政策学></label>
+      <label><input type="checkbox" name="check[]" value="教育学部・心身発達科学<教育社会科学/教育実践・政策学>">総合教育科学<教育社会科学/教育実践・政策学></label>
       <br>
-      <label><input type="checkbox" name="教育学部[]" value="総合教育科学<教育社会科学/教育実践・政策学>">総合教育科学<教育社会科学/教育実践・政策学></label>
+      <label><input type="checkbox" name="check[]" value="教育学部・総合教育科学<教育社会科学/教育実践・政策学>">総合教育科学<教育社会科学/教育実践・政策学></label>
       <br><br>
     <li>教養学部</li>
-      <label><input type="checkbox" name="教養学部[]" value="教養学科<超域文化科学>">教養学科<超域文化科学></label>
+      <label><input type="checkbox" name="check[]" value="教養学部・教養学科<超域文化科学>">教養学科<超域文化科学></label>
       <br>
-      <label><input type="checkbox" name="教養学部[]" value="教養学科<地域文化科学>">教養学科<地域文化科学></label>
+      <label><input type="checkbox" name="check[]" value="教養学部・教養学科<地域文化科学>">教養学科<地域文化科学></label>
       <br>
-      <label><input type="checkbox" name="教養学部[]" value="教養学科<総合社会科学>">教養学科<総合社会科学></label>
+      <label><input type="checkbox" name="check[]" value="教養学部・教養学科<総合社会科学>">教養学科<総合社会科学></label>
       <br>
-      <label><input type="checkbox" name="教養学部[]" value="統合自然科学科<数理自然科学>">統合自然科学科<数理自然科学></label>
+      <label><input type="checkbox" name="check[]" value="教養学部・統合自然科学科<数理自然科学>">統合自然科学科<数理自然科学></label>
       <br>
-      <label><input type="checkbox" name="教養学部[]" value="統合自然科学科<物質基礎科学>">統合自然科学科<物質基礎科学></label>
+      <label><input type="checkbox" name="check[]" value="教養学部・統合自然科学科<物質基礎科学>">統合自然科学科<物質基礎科学></label>
       <br>
-      <label><input type="checkbox" name="教養学部[]" value="統合自然科学科<統合生命科学>">統合自然科学科<統合生命科学></label>
+      <label><input type="checkbox" name="check[]" value="教養学部・統合自然科学科<統合生命科学>">統合自然科学科<統合生命科学></label>
       <br>
-      <label><input type="checkbox" name="教養学部[]" value="統合自然科学科<認知行動科学>">統合自然科学科<認知行動科学></label>
+      <label><input type="checkbox" name="check[]" value="教養学部・統合自然科学科<認知行動科学>">統合自然科学科<認知行動科学></label>
       <br>
-      <label><input type="checkbox" name="教養学部[]" value="学際科学科<A群>">学際科学科&lt;A群&gt;</label>
+      <label><input type="checkbox" name="check[]" value="教養学部・学際科学科<A群>">学際科学科&lt;A群&gt;</label>
       <br>
-      <label><input type="checkbox" name="教養学部[]" value="学際科学科<B群>>">学際科学科&lt;B群&gt;</label>
+      <label><input type="checkbox" name="check[]" value="教養学部・学際科学科<B群>>">学際科学科&lt;B群&gt;</label>
       <br><br>
     <li>教養PEAK学部</li>
-      <label><input type="checkbox" name="教養PEAK学部[]" value="教養学科国際日本研究コース">教養学科国際日本研究コース</label>
+      <label><input type="checkbox" name="check[]" value="教養PEAK学部・教養学科国際日本研究コース">教養学科国際日本研究コース</label>
       <br>
-      <label><input type="checkbox" name="教養PEAK学部[]" value="学際科学科国際環境学コース">学際科学科国際環境学コース</label>
+      <label><input type="checkbox" name="check[]" value="教養PEAK学部・学際科学科国際環境学コース">学際科学科国際環境学コース</label>
       <br><br>
     <li>工学部</li>
-      <label><input type="checkbox" name="工学部[]" value="社会基盤学科<社会基盤学A>">社会基盤学科<社会基盤学A></label>
+      <label><input type="checkbox" name="check[]" value="工学部・社会基盤学科<社会基盤学A>">社会基盤学科<社会基盤学A></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="社会基盤学科<社会基盤学B>">社会基盤学科<社会基盤学B></label>
+      <label><input type="checkbox" name="check[]" value="工学部・社会基盤学科<社会基盤学B>">社会基盤学科<社会基盤学B></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="社会基盤学科<社会基盤学C>">社会基盤学科<社会基盤学C></label>
+      <label><input type="checkbox" name="check[]" value="工学部・社会基盤学科<社会基盤学C>">社会基盤学科<社会基盤学C></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="建築学科<建築学>">建築学科<建築学></label>
+      <label><input type="checkbox" name="check[]" value="工学部・建築学科<建築学>">建築学科<建築学></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="都市工学科<都市環境工学>">都市工学科<都市環境工学></label>
+      <label><input type="checkbox" name="check[]" value="工学部・都市工学科<都市環境工学>">都市工学科<都市環境工学></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="都市工学科<都市計画>">都市工学科<都市計画></label>
+      <label><input type="checkbox" name="check[]" value="工学部・都市工学科<都市計画>">都市工学科<都市計画></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="機械工学科<機械工学A>">機械工学科<機械工学A></label>
+      <label><input type="checkbox" name="check[]" value="工学部・機械工学科<機械工学A>">機械工学科<機械工学A></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="機械情報工学科<機械工学B>">機械情報工学科<機械工学B></label>
+      <label><input type="checkbox" name="check[]" value="工学部・機械情報工学科<機械工学B>">機械情報工学科<機械工学B></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="航空宇宙工学科<航空宇宙学>">航空宇宙工学科<航空宇宙学></label>
+      <label><input type="checkbox" name="check[]" value="工学部・航空宇宙工学科<航空宇宙学>">航空宇宙工学科<航空宇宙学></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="精密工学科<精密工学>">精密工学科<精密工学></label>
+      <label><input type="checkbox" name="check[]" value="工学部・精密工学科<精密工学>">精密工学科<精密工学></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="電子情報工学科<電子情報工学>">電子情報工学科<電子情報工学></label>
+      <label><input type="checkbox" name="check[]" value="工学部・電子情報工学科<電子情報工学>">電子情報工学科<電子情報工学></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="電気電子工学科<電気電子工学>">電気電子工学科<電気電子工学></label>
+      <label><input type="checkbox" name="check[]" value="工学部・電気電子工学科<電気電子工学>">電気電子工学科<電気電子工学></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="物理工学科<応用物理・物理工学>">物理工学科<応用物理・物理工学></label>
+      <label><input type="checkbox" name="check[]" value="工学部・物理工学科<応用物理・物理工学>">物理工学科<応用物理・物理工学></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="計数工学科<計数工学・数理/システム情報>">計数工学科<計数工学・数理/システム情報></label>
+      <label><input type="checkbox" name="check[]" value="工学部・計数工学科<計数工学・数理/システム情報>">計数工学科<計数工学・数理/システム情報></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="マテリアル工学科<マテリアル工学A>">マテリアル工学科<マテリアル工学A></label>
+      <label><input type="checkbox" name="check[]" value="工学部・マテリアル工学科<マテリアル工学A>">マテリアル工学科<マテリアル工学A></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="マテリアル工学科<マテリアル工学B>">マテリアル工学科<マテリアル工学B></label>
+      <label><input type="checkbox" name="check[]" value="工学部・マテリアル工学科<マテリアル工学B>">マテリアル工学科<マテリアル工学B></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="マテリアル工学科<マテリアル工学C>">マテリアル工学科<マテリアル工学C></label>
+      <label><input type="checkbox" name="check[]" value="工学部・マテリアル工学科<マテリアル工学C>">マテリアル工学科<マテリアル工学C></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="応用化学科<応用化学>">応用化学科<応用化学></label>
+      <label><input type="checkbox" name="check[]" value="工学部・応用化学科<応用化学>">応用化学科<応用化学></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="化学システム工学科<化学システム工学>">化学システム工学科<化学システム工学></label>
+      <label><input type="checkbox" name="check[]" value="工学部・化学システム工学科<化学システム工学>">化学システム工学科<化学システム工学></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="化学生命工学科<化学生命工学>">化学生命工学科<化学生命工学></label>
+      <label><input type="checkbox" name="check[]" value="工学部・化学生命工学科<化学生命工学>">化学生命工学科<化学生命工学></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="システム創成学科<システム創成A>">システム創成学科<システム創成A></label>
+      <label><input type="checkbox" name="check[]" value="工学部・システム創成学科<システム創成A>">システム創成学科<システム創成A></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="システム創成学科<システム創成B>">システム創成学科<システム創成B></label>
+      <label><input type="checkbox" name="check[]" value="工学部・システム創成学科<システム創成B>">システム創成学科<システム創成B></label>
       <br>
-      <label><input type="checkbox" name="工学部[]" value="システム創成学科<システム創成C>">システム創成学科<システム創成C></label>
+      <label><input type="checkbox" name="check[]" value="工学部・システム創成学科<システム創成C>">システム創成学科<システム創成C></label>
       <br><br>
     <li>理学部</li>
-      <label><input type="checkbox" name="理学部[]" value="数学">数学</label>
+      <label><input type="checkbox" name="check[]" value="理学部・数学">数学</label>
       <br>
-      <label><input type="checkbox" name="理学部[]" value="情報科学">情報科学</label>
+      <label><input type="checkbox" name="check[]" value="理学部・情報科学">情報科学</label>
       <br>
-      <label><input type="checkbox" name="理学部[]" value="物理学">物理学</label>
+      <label><input type="checkbox" name="check[]" value="理学部・物理学">物理学</label>
       <br>
-      <label><input type="checkbox" name="理学部[]" value="天文学">天文学</label>
+      <label><input type="checkbox" name="check[]" value="理学部・天文学">天文学</label>
       <br>
-      <label><input type="checkbox" name="理学部[]" value="地球惑星物理学">地球惑星物理学</label>
+      <label><input type="checkbox" name="check[]" value="理学部・地球惑星物理学">地球惑星物理学</label>
       <br>
-      <label><input type="checkbox" name="理学部[]" value="地球惑星環境学">地球惑星環境学</label>
+      <label><input type="checkbox" name="check[]" value="理学部・地球惑星環境学">地球惑星環境学</label>
       <br>
-      <label><input type="checkbox" name="理学部[]" value="化学">化学</label>
+      <label><input type="checkbox" name="check[]" value="理学部・化学">化学</label>
       <br>
-      <label><input type="checkbox" name="理学部[]" value="生物化学">生物化学</label>
+      <label><input type="checkbox" name="check[]" value="理学部・生物化学">生物化学</label>
       <br>
-      <label><input type="checkbox" name="理学部[]" value="生物情報科学">生物情報科学</label>
+      <label><input type="checkbox" name="check[]" value="理学部・生物情報科学">生物情報科学</label>
       <br>
-      <label><input type="checkbox" name="理学部[]" value="生物学">生物学</label>
+      <label><input type="checkbox" name="check[]" value="理学部・生物学">生物学</label>
       <br><br>
     <li>農学部</li>
-      <label><input type="checkbox" name="農学部[]" value="応用生命科学<生命化学・工学>">応用生命科学<生命化学・工学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・応用生命科学<生命化学・工学>">応用生命科学<生命化学・工学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="応用生命科学<応用生物学>">応用生命科学<応用生物学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・応用生命科学<応用生物学>">応用生命科学<応用生物学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="応用生命科学<森林生物科学>">応用生命科学<森林生物科学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・応用生命科学<森林生物科学>">応用生命科学<森林生物科学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="応用生命科学<水圏生物化学>">応用生命科学<水圏生物化学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・応用生命科学<水圏生物化学>">応用生命科学<水圏生物化学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="応用生命科学<動物生命システム科学>">応用生命科学<動物生命システム科学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・応用生命科学<動物生命システム科学>">応用生命科学<動物生命システム科学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="応用生命科学<生物素材化学>">応用生命科学<生物素材化学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・応用生命科学<生物素材化学>">応用生命科学<生物素材化学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="環境資源科学<緑地環境学>">応用生命科学<緑地環境学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・環境資源科学<緑地環境学>">応用生命科学<緑地環境学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="環境資源科学<森林環境資源科学>">応用生命科学<森林環境資源科学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・環境資源科学<森林環境資源科学>">応用生命科学<森林環境資源科学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="環境資源科学<木質構造科学>">応用生命科学<木質構造科学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・環境資源科学<木質構造科学>">応用生命科学<木質構造科学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="環境資源科学<生物・環境工学>">応用生命科学<生物・環境工学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・環境資源科学<生物・環境工学>">応用生命科学<生物・環境工学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="環境資源科学<農業・資源経済学>">応用生命科学<農業・資源経済学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・環境資源科学<農業・資源経済学>">応用生命科学<農業・資源経済学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="環境資源科学<フィールド科学>">応用生命科学<フィールド科学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・環境資源科学<フィールド科学>">応用生命科学<フィールド科学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="環境資源科学<国際開発農学>">応用生命科学<国際開発農学></label>
+      <label><input type="checkbox" name="check[]" value="農学部・環境資源科学<国際開発農学>">応用生命科学<国際開発農学></label>
       <br>
-      <label><input type="checkbox" name="農学部[]" value="獣医学課程獣医学専修">獣医学課程獣医学専修</label>
+      <label><input type="checkbox" name="check[]" value="農学部・獣医学課程獣医学専修">獣医学課程獣医学専修</label>
       <br><br>
     <li>薬学部</li>
-      <label><input type="checkbox" name="薬学部[]" value="薬科学科・薬学科">薬科学科・薬学科</label>
+      <label><input type="checkbox" name="check[]" value="薬学部・薬科学科・薬学科">薬科学科・薬学科</label>
       <br><br>
     <li>医学部</li>
-      <label><input type="checkbox" name="医学部[]" value="医学科">医学科</label>
+      <label><input type="checkbox" name="check[]" value="医学部・医学科">医学科</label>
       <br>
-      <label><input type="checkbox" name="医学部[]" value="健康総合科学科">健康総合科学科</label>
+      <label><input type="checkbox" name="check[]" value="医学部・健康総合科学科">健康総合科学科</label>
       <br>
     </ul>
 
-      <input type="submit" value="登録して次へ">
+    <input type="submit" value="計算結果を見る">
     <% end %>
+    <script>
+    $("input[type=checkbox]").click(function(){
+      var $count = $("input[type=checkbox]:checked").length;
+      var $not = $('input[type=checkbox]').not(':checked');
+      //チェックが3つ付いたら、チェックされてないチェックボックスにdisabledを加える
+      if($count >= 3) {
+        $not.attr("disabled",true);
+      }else{
+        //3つ以下ならisabledを外す
+        $not.attr("disabled",false);
+      }
+    });
+    </script>
   </body>
 
   </html>

@@ -18,6 +18,12 @@
     @result = @s_w_c.sum/@w_c.sum %>
     <p>あなたの基本平均点はこちらです。</p>
     <%= @result.round(2) %>点
+    <p>志望学科</p>
+    <ul>
+      <li><%= @current_user.dep1 %></li>
+      <% if @current_user.dep2.present? %><li><%= @current_user.dep2 %></li><% end %>
+      <% if @current_user.dep3.present? %><li><%= @current_user.dep3 %></li><% end %>
+    </ul>
     <p>結果を共有する</p>
     <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://ut-shinhurii.herokuapp.com" data-text="進振りサービスUT_Shinhuriiを使ったよ！私の進振り点は<%= @result.round(2) %>点でした！" data-hashtags="UT_Shinhurii">Tweet</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

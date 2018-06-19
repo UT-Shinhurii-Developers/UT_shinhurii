@@ -66,3 +66,6 @@ gem 'rails-i18n'
 
 #SNSボタンを追加するgem
 gem 'social-share-button'
+
+#メールアドレス認証を可能にするgem
+gem 'devise'
