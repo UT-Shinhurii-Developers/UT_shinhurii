@@ -44,7 +44,8 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-end  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -74,7 +75,7 @@ gem 'devise'
 gem 'materialize-sass', '~> 1.0.0.rc1'
 
 #Material Iconsを追加するgem
-gem 'material_icons' 
+gem 'material_icons'
 
 #jQueryを追加するgem
 gem "jquery-rails"
