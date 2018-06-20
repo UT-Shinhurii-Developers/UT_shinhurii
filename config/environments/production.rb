@@ -90,15 +90,17 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #メール送信機能を実装するため、以下を追加する
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = {host: 'http://ut-shinhurii.herokuapp.com' }
+  config.action_mailer.raise_delivery_errors = false　#この一文も追記!!
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    port:                 587,
-    address:              'smtp.gmail.com',
-    domain:               'gmail.com',
-    user_name:            'UT.shinhurii+noreply@gmail.com', # Gmailメールアドレス
-    password:             'KALSshinhurii', # Gmailメールアドレスのパスワード
-    authentication:       'login',
-    enable_starttls_auto: true,
+      :user_name => "app100180481@heroku.com",
+  　　　　　　　　:password => "ps3qktir3128",
+      :domain => "heroku.com",
+      :address => "smtp.sendgrid.net",
+      :port => 587,
+      :authentication => :plain,
+      :enable_starttls_auto => true
   }
+  config.action_mailer.default_url_options = { :host => 'http://ut-shinhurii.herokuapp.com' }
 end

@@ -17,5 +17,7 @@ module ShinhuriiApp
 
     #バリデーションのエラーメッセージを日本語化する
     config.i18n.default_locale = :ja
+    config.assets.initialize_on_precompile = false
+    config.mailer_sender = '"UT_Shinhurii" <app100180481@heroku.com>'
   end
 end
