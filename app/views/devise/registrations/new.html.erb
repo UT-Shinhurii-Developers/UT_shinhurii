@@ -5,16 +5,15 @@
 
   <div class="field">
     東京大学の<%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %><br />
   </div>
 
-  ユーザ名(公開されません)<br />
-  <%= f.label :name %>
+
+  <%= f.label :name %><br />
   <%= f.text_field :name, value: @user.name %><br />
-  科類<br />
-  <%= f.label :karui %>
+
+  <%= f.label :karui %><br />
   <%= f.select :karui, [["理科一類", "理科一類"],["理科二類", "理科二類"],["理科三類", "理科三類"],["文科一類","文科一類"],["文科二類","文科二類"],["文科三類","文科三類"]], :prompt => "選択してください" %><br />
-  入学年度<br />
   <%= f.label :year %>
   <%= f.select :year, [["2016年", "2016年"],["2017年","2017年"],["2018年","2018年"]], :prompt => "選択してください" %><br />
 
@@ -33,7 +32,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "登録" %>
   </div>
 <% end %>
 

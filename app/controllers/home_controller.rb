@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-before_action :authenticate_user, {only: [:input, :result, :department]}
+before_action :authenticate_user!, {only: [:input, :result, :department]}
 
   def index
     render :layout => 'index_layout'

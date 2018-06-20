@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {
+  :sessions => 'users/sessions',
+  :registrations => 'users/registrations'
+}
+  get 'users' => 'users/sign_up'
+
   get 'inquiry/index'
 
   post 'user/department' => 'user#department'
@@ -8,7 +13,7 @@ Rails.application.routes.draw do
   get 'user/new' => 'user#new'
   post 'user/create' => 'user#create'
   get 'user/create' => 'user#create'
-  get 'user/:name' => 'user#mypage'
+  get 'user/mypage' => 'user#mypage'
   get 'login_form' => 'user#login_form'
   post 'login' => 'user#login'
   get 'login' => 'user#login'

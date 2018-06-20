@@ -9,10 +9,10 @@
   </head>
 
   <body>
-    <% if session[:user_id] %>
+    <% if user_signed_in? %>
       <%= link_to("トップへ", "/") %>
       <%= link_to("ログアウト", "/users/sign_out", {method: "delete"}) %>
-      <%= link_to("#{@current_user.name}のマイページ", "/user/#{@current_user.name}") %>
+      <%= link_to("#{current_user.name}のマイページ", "/user/mypage") %>
     <% end %>
     <% if flash[:notice] %>
       <%= flash[:notice] %>

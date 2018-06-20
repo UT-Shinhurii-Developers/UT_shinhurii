@@ -10,6 +10,8 @@ ja:
         password: パスワード
         karui: 科類
         year: 入学年度
+        email: メールアドレス
+        "password confirmation": 確認用のパスワード
 
   activemodel:
     attributes:
@@ -55,7 +57,7 @@ ja:
       failure: "%{kind} アカウントによる認証に失敗しました。理由：（%{reason}）"
       success: "%{kind} アカウントによる認証に成功しました。"
     passwords:
-      no_token: "このページにはアクセスできません。パスワード再設定メールのリンクからアクセスされた場合には、URL をご確認ください。"
+      no_token: "このページにはアクセスできません。パスワード再設定メールのリンクからアクセスされた場合には、URLをご確認ください。"
       send_instructions: 'パスワードの再設定について数分以内にメールでご連絡いたします。'
       send_paranoid_instructions: "あなたのメールアドレスが登録済みの場合、パスワード再設定用のメールが数分以内に送信されます。"
       updated: 'パスワードが正しく変更されました。'
@@ -84,5 +86,5 @@ ja:
       not_found: 'は見つかりませんでした。'
       not_locked: 'は凍結されていません。'
       not_saved:
-        one: "エラーが発生したため %{resource} は保存されませんでした:"
-        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした:"
+        one: "エラーが発生したため、%{resource}は保存されませんでした:"
+        other: "%{count} 件のエラーが発生したため、%{resource}は保存されませんでした:"

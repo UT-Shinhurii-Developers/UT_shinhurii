@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable
+  validates :email, format: { with: /@g.ecc.u-tokyo.ac.jp\z/i ,:message => 'の形式が不適切です。'}
   validates :name, presence: true
-  #validates :karui, presence: true
-  #validates :year, presence: true
-  validates :password, length: {minimum:6}
+  validates :karui, presence: true
+  validates :year, presence: true
 end

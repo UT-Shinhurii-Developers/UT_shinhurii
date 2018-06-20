@@ -1,6 +1,6 @@
 class UserController < ApplicationController
 
-before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add, :edit, :department]}
+before_action :authenticate_user!, {only: [:mypage, :logout, :edit, :update, :add, :edit, :department]}
 
   def new
     @user = User.new
@@ -30,11 +30,6 @@ before_action :authenticate_user, {only: [:mypage, :logout, :edit, :update, :add
     end
   end
   def mypage
-    @user = User.find_by(name: params[:name])
-    if @current_user != @user
-      flash[:notice] = "権限がありません"
-      redirect_to("/")
-    end
     render :layout => 'mypage_layout'
   end
   def login_form

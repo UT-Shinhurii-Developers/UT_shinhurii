@@ -6,10 +6,11 @@
 </head>
 
 <body>
-  <h1><%= @current_user.name %>の成績表</h1>
-  <p>科類：<%= @current_user.karui %></p>
+  <h1><%= current_user.name %>の成績表</h1>
+  <p>科類：<%= current_user.karui %></p>
+  <p>入学年度：<%= current_user.year %></p>
   <p>成績データ</p>
-  <% @scores = Score.where(user_name: @current_user.name) %>
+  <% @scores = Score.where(user_name: current_user.name) %>
   <% if @scores.any? %>
     <p><%= @scores.length %>個の成績データがあります</p>
     <%= link_to("全削除", "/score/destroy_all", method: :post, data: {confirm:'成績を全て削除してよろしいですか？'}) %>
@@ -21,7 +22,7 @@
     <% @class_types = ["基礎科目","総合科目L","総合科目A","総合科目B","総合科目C","総合科目D","総合科目E","総合科目F"] %>
     <% @class_type = @class_types[i] %>
     <li><%= @class_type %><%= link_to("追加", "/add/#{@class_type}") %></li>
-      <% @scores = Score.where(["user_name=? and class_type=?", @current_user.name, @class_type]) %>
+      <% @scores = Score.where(["user_name=? and class_type=?", current_user.name, @class_type]) %>
       <% if @scores.any? %>
         <table border="1">
         <thead>
@@ -59,7 +60,7 @@
     <% end %>
     <li>基本平均点</li>
     <%
-    @scores = Score.where(user_name: @current_user.name)
+    @scores = Score.where(user_name: current_user.name)
     if @scores.any?
       @score = @scores.all.map{|score| score.score}
       @weight = @scores.all.map{|score| score.weight}
@@ -70,14 +71,32 @@
       <% if @result.nan? %>0<% else %><%= @result %><% end %>点
       <br><br><li>志望学科</li>
       <ul>
-        <% if @current_user.dep3.present? then @deps = [@current_user.dep1, @current_user.dep2, @current_user.dep3] %>
-        <% elsif @current_user.dep2.present? then @deps = [@current_user.dep1, @current_user.dep2] %>
-        <% else @deps = [@current_user.dep1] end %>
-        <% @deps.each {|dep| %>
-          <li><%= dep %></li>
-          <% if dep.include?("法学部") %>
-          <% end %>
-        <% } %>
+        <% if current_user.dep3.present? then @deps = [current_user.dep1, current_user.dep2, current_user.dep3] %>
+        <% elsif current_user.dep2.present? then @deps = [current_user.dep1, current_user.dep2] %>
+        <% elsif current_user.dep1.present? then @deps = [current_user.dep1] %>
+        <% else @err = "err" %>
+        <% end %>
+        <% if @err.nil? %>
+          <% @deps.each {|dep| %>
+            <li><%= dep %></li>
+            <p>あなたのこの学部の進振り点は<%= @result.round(2) %>点です。</p>
+            <p>この学部を志望している学生の、この学科の平均進振り点は点です。</p>
+            <p>また、必要な単位数はこちらです。</p>
+            <ul>
+              <li>基礎科目:</li>
+              <li>総合科目L:</li>
+              <li>総合科目A:</li>
+              <li>総合科目B:</li>
+              <li>総合科目C:</li>
+              <li>総合科目D:</li>
+              <li>総合科目E:</li>
+              <li>総合科目F:</li>
+            </ul>
+            <br />
+          <% } %>
+        <% else %>
+          <p>志望学科は入力されていません。</p>
+        <% end %>
       </ul>
       <p>進振り点を共有する</p>
       <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://ut-shinhurii.herokuapp.com" data-text="進振りサービスUT_Shinhuriiを使ったよ！私の進振り点は<%= @result %>点でした！" data-hashtags="UT_Shinhurii">Tweet</a>

@@ -87,16 +87,8 @@ class ScoreController < ApplicationController
       @score_list[64] = [params[:save64],params[:class_name64],params[:score64],params[:credit64],params[:weight64]]
       @score = Array.new(n)
       for i in 1..n do
-        if @score_list[i][0].present?
-          if @score_list[i][1].present? && @score_list[i][2].present? && @score_list[i][3].present? && @score_list[i][4].present?
-            @score[i] = Score.new(user_name:@current_user.name, class_type:@class, class_name:@score_list[i][1], score:@score_list[i][2], credit:@score_list[i][3], weight:@score_list[i][4])
-          else
-            flash[:notice] = "チェックをつけた授業の点数を入力してください"
-            render "home/input", :layout => 'input_layout'
-            return
-          end
-        else
-          next
+        if @score_list[i][2].present?
+            @score[i] = Score.new(user_name:current_user.name, class_type:@class, class_name:@score_list[i][1], score:@score_list[i][2], credit:@score_list[i][3], weight:@score_list[i][4])
         end
       end
       for i in 1..n do
@@ -230,15 +222,8 @@ class ScoreController < ApplicationController
       @score_list[64] = [params[:save64],params[:class_name64],params[:score64],params[:credit64],params[:weight64]]
       @score = Array.new(n)
       for i in 1..n do
-        if @score_list[i][0].present?
-          if @score_list[i][1].present? && @score_list[i][2].present? && @score_list[i][3].present? && @score_list[i][4].present?
-            @score[i] = Score.new(user_name:@current_user.name, class_type:@class, class_name:@score_list[i][1], score:@score_list[i][2], credit:@score_list[i][3], weight:@score_list[i][4])
-          else
-            flash[:notice] = "チェックをつけた授業の点数を入力してください"
-            render "user/add"
-          end
-        else
-          next
+        if @score_list[i][2].present?
+            @score[i] = Score.new(user_name:current_user.name, class_type:@class, class_name:@score_list[i][1], score:@score_list[i][2], credit:@score_list[i][3], weight:@score_list[i][4])
         end
       end
       for i in 1..n do
@@ -262,7 +247,7 @@ class ScoreController < ApplicationController
       else
         flash[:notice] = @class + "の成績は入力されませんでした"
       end
-      redirect_to("/user/#{@current_user.name}")
+      redirect_to("/user/#{current_user.name}")
     else
       render "user/add"
     end
@@ -274,10 +259,10 @@ class ScoreController < ApplicationController
     redirect_to("/user/#{@score.user_name}")
   end
   def destroy_all
-    @scores = Score.where(user_name: @current_user.name)
+    @scores = Score.where(user_name: current_user.name)
     @scores.destroy_all
     flash[:notice] = "成績情報を全て削除しました"
-    redirect_to("/user/#{@current_user.name}")
+    redirect_to("/user/#{current_user.name}")
   end
   def update
     @score = Score.find_by(id:params[:id])
@@ -294,6 +279,6 @@ class ScoreController < ApplicationController
     end
     @score.update_attributes(:class_name => params[:class_name], :score => params[:score], :weight => params[:weight], :credit => params[:credit])
     flash[:notice] = "成績情報を編集しました"
-    redirect_to("/user/#{@current_user.name}")
+    redirect_to("/user/#{current_user.name}")
   end
 end

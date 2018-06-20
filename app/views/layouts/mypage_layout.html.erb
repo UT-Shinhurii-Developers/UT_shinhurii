@@ -11,7 +11,7 @@
   <body>
     <%= link_to("トップへ", "/") %>
     <%= link_to("ログアウト", "/users/sign_out", {method: "delete"}) %>
-    <% if flash[:notice] %>
+    <% if user_signed_in? %>
       <%= flash[:notice] %>
     <% end %>
     <%= yield %>

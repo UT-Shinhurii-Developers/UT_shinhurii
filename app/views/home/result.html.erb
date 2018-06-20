@@ -8,7 +8,7 @@
 <body>
   <h1>計算結果</h1>
   <%
-  @scores = Score.where(user_name: @current_user.name)
+  @scores = Score.where(user_name: current_user.name)
   if @scores.any?
     @score = @scores.all.map{|score| score.score}
     @weight = @scores.all.map{|score| score.weight}
@@ -18,11 +18,34 @@
     @result = @s_w_c.sum/@w_c.sum %>
     <p>あなたの基本平均点はこちらです。</p>
     <%= @result.round(2) %>点
-    <p>志望学科</p>
+    <br><br><li>志望学科</li>
     <ul>
-      <li><%= @current_user.dep1 %></li>
-      <% if @current_user.dep2.present? %><li><%= @current_user.dep2 %></li><% end %>
-      <% if @current_user.dep3.present? %><li><%= @current_user.dep3 %></li><% end %>
+      <% if current_user.dep3.present? then @deps = [current_user.dep1, current_user.dep2, current_user.dep3] %>
+      <% elsif current_user.dep2.present? then @deps = [current_user.dep1, current_user.dep2] %>
+      <% elsif current_user.dep1.present? then @deps = [current_user.dep1] %>
+      <% else @err = "err" %>
+      <% end %>
+      <% if @err.nil? %>
+        <% @deps.each {|dep| %>
+          <li><%= dep %></li>
+          <p>あなたのこの学部の進振り点は<%= @result.round(2) %>点です。</p>
+          <p>この学部を志望している学生の、この学科の平均進振り点は点です。</p>
+          <p>また、必要な単位数はこちらです。</p>
+          <ul>
+            <li>基礎科目:</li>
+            <li>総合科目L:</li>
+            <li>総合科目A:</li>
+            <li>総合科目B:</li>
+            <li>総合科目C:</li>
+            <li>総合科目D:</li>
+            <li>総合科目E:</li>
+            <li>総合科目F:</li>
+          </ul>
+          <br />
+        <% } %>
+      <% else %>
+        <p>志望学科は入力されていません。</p>
+      <% end %>
     </ul>
     <p>結果を共有する</p>
     <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://ut-shinhurii.herokuapp.com" data-text="進振りサービスUT_Shinhuriiを使ったよ！私の進振り点は<%= @result.round(2) %>点でした！" data-hashtags="UT_Shinhurii">Tweet</a>

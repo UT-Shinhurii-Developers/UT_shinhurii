@@ -19,8 +19,9 @@
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "ログイン" %>
   </div>
+  <p><small>*20回連続でログインに失敗すると、アカウントが凍結されます。</small></p>
 <% end %>
 
 <%= render "devise/shared/links" %>

@@ -7,8 +7,8 @@
 
 <body>
   <h1>進振りサービス for 東大生</h1>
-  <% if session[:user_id] %>
-  <% @scores = Score.where(user_name: @current_user.name) %>
+  <% if user_signed_in?	 %>
+  <% @scores = Score.where(user_name: current_user.name) %>
   <% if @scores.any? %>
     <%= link_to("成績を追加する", "/input/基礎科目") %>
   <% else %>

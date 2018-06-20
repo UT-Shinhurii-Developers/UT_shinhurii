@@ -36,7 +36,7 @@
     <table>
     <thead>
       <tr>
-        <th>登録</th>
+        <!--<th>登録</th>-->
         <th>授業名</th>
         <th>点数</th>
       </tr>
@@ -44,7 +44,7 @@
     <tbody>
       <%
       @placeholder = Array.new(31).map{Array.new(5,"")}
-      case @current_user.karui
+      case current_user.karui
       when "理科一類"
         if @class == "kiso"
           n = 28
@@ -525,12 +525,12 @@
         credit_i = "credit" + i.to_s
         weight_i = "weight" + i.to_s %>
         <tr>
-          <td>
+          <!--<td>
             <input type="checkbox" id="<%= i %>" name="<%= save_i %>" value="checked" <% if @score_list[i][0]=="checked" %>checked<% end %>>
-          </td>
+          </td>-->
           <td>
             <input type="hidden" name="<%= class_name_i %>" value="<%= @placeholder[i][1] %>">
-            <label for="<%= i %>"><%= @placeholder[i][1] %></label>
+            <!--<label for="<%= i %>">--><%= @placeholder[i][1] %><!--</label>-->
           </td>
           <td>
             <input type="number" name="<%= score_i %>" value="<%= @score_list[i][2] %>">
@@ -573,7 +573,7 @@
     <table>
     <thead>
       <tr>
-        <th>登録</th>
+        <!--<th>登録</th>-->
         <th>授業名</th>
         <th>点数</th>
       </tr>
@@ -581,7 +581,7 @@
     <tbody>
       <%
       @placeholder = Array.new(31).map{Array.new(5,"")}
-      case @current_user.karui
+      case current_user.karui
       when "理科一類"
         if @class == "kiso"
           n = 28
@@ -1061,12 +1061,12 @@
         credit_i = "credit" + i.to_s
         weight_i = "weight" + i.to_s %>
         <tr>
-          <td>
+          <!--<td>
             <input type="checkbox" id="<%= i %>" name="<%= save_i %>" value="checked" <% if @score_list[i][0]=="checked" %>checked<% end %>>
-          </td>
+          </td>-->
           <td>
             <input type="hidden" name="<%= class_name_i %>" value="<%= @placeholder[i][1] %>">
-            <label for="<%= i %>"><%= @placeholder[i][1] %></label>
+            <!--<label for="<%= i %>">--><%= @placeholder[i][1] %><!--</label>-->
           </td>
           <td>
             <input type="number" name="<%= score_i %>" value="<%= @score_list[i][2] %>">
