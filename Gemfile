@@ -69,3 +69,15 @@ gem 'social-share-button'
 
 #メールアドレス認証を可能にするgem
 gem 'devise'
+
+#Materializedを追加するgem
+gem 'materialize-sass', '~> 1.0.0.rc1'
+
+#Material Iconsを追加するgem
+gem 'material_icons' 
+
+#jQueryを追加するgem
+gem "jquery-rails"
+
+#wdmを追加するgem
+gem 'wdm'

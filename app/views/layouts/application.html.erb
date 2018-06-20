@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ShinhuriiApp</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -19,8 +17,7 @@
     <% if flash[:notice] %>
       <%= flash[:notice] %>
     <% end %>
+
     <%= yield %>
-    <h3>KALS Project</h3>
-    <p><small>created by やはりT大の進振りシステムはまちがっている。</small></p>
   </body>
 </html>

@@ -6,7 +6,10 @@
 </head>
 
 <body>
-  <h1>ログイン</h1>
+ <div class="container-us">
+ <div class="card-pannel">
+  <h5 class="h5-us">ログイン</h5>
+  <div calss="card-contents">
   <% if @error_message.present? %>
     <strong><%= @error_message %></strong>
   <% end %>
@@ -18,6 +21,9 @@
     <input type="submit" value="ログイン">
   <% end %>
   <p>または<%= link_to("新規登録", "/user/new") %></p>
+	</div>
+	</div>
+    </div>
 </body>
 
 </html>
