@@ -89,8 +89,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  #メール送信機能を実装するため、以下を追加する
-  config.action_mailer.default_url_options = {host: 'http://ut-shinhurii.herokuapp.com' }
   #config.action_mailer.raise_delivery_errors = false　#この一文も追記!!
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -102,5 +100,7 @@ Rails.application.configure do
       :authentication => :plain,
       :enable_starttls_auto => true
   }
-  config.action_mailer.default_url_options = { :host => 'http://ut-shinhurii.herokuapp.com' }
+  #メール送信機能を実装するため、以下を追加する
+  config.action_mailer.default_url_options = {host: 'http://ut-shinhurii.herokuapp.com' }
+  #config.action_mailer.default_url_options = { :host => 'http://ut-shinhurii.herokuapp.com' }
 end
